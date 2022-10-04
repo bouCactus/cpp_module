@@ -4,7 +4,7 @@ NAME = phone
 RM = rm -rf
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
-SRCS = Contact.cpp phone.cpp PhoneBook.cpp
+SRCS = Contact.cpp phone.cpp PhoneBook.cpp show.cpp
 CXXOBJ = $(SRCS:.cpp=.o)
 
 .cpp.o:

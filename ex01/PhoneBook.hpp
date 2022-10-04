@@ -12,3 +12,7 @@ public:
     void    exit();
     void    show(int size);
 };
+
+
+void    print_line_field(int field_size);
+void    print_content_in_field(int pos, std::string content);
