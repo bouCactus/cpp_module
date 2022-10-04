@@ -10,5 +10,5 @@ public:
     void    add(int size);
     void    search();
     void    exit();
-    void    show();
+    void    show(int size);
 };
