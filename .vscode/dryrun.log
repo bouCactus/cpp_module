@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/aboudarg/Curses/cpp/cpp_module'
+make: Leaving directory `/Users/aboudarg/Curses/cpp/cpp_module'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
