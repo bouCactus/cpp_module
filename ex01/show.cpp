@@ -38,7 +38,7 @@ void print_content_in_field(uint8_t pos, std::string content, size_t size)
     {
         if (content.length() > 9 && (pos & FLAG_4))
             content.replace(9, 1, ".");
-           
+
         std::cout << content.substr(0, 10);
     }
     std::cout << "|";
