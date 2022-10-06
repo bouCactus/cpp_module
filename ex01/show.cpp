@@ -25,8 +25,6 @@ void print_line_field(int *field_size, int column_size)
 
 void print_content_in_field(uint8_t pos, std::string content, size_t size)
 {
-    (void)size;
-    (void)content;
     size_t width;
     width = 0;
     if (pos & FLAG_1)

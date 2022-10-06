@@ -62,7 +62,7 @@ void    PhoneBook::search(int size)
     show(id, size);
     std::cout << "choose an index: " ;
     getline(std::cin, input);
-    while (input.empty())
+    while (input.empty() || !(std::all_of(input.begin(), input.end(), ::isdigit)))
     {
         std::cout <<"plase retry a number: ";
         getline(std::cin, input);
