@@ -5,24 +5,24 @@
 int main()
 {
     
-    int size;
+    int index;
     std::string command;
     std::string dummy;
     PhoneBook phone;
 
     std::cout << "input: ";
-    size = 1;
+    index = 0;
     while (getline(std::cin, command))
     {
         if (!command.compare("ADD"))
         {
             std::cout << command << " . is found" << std::endl;
-            phone.add(size);
+            index = phone.add(index);
         }
         if (!command.compare("SEARCH"))
         {
             std::cout << command << " . is found " << std::endl;
-            phone.show(size);
+            phone.search(index);
         }
         if (!command.compare("EXIT"))
         {
