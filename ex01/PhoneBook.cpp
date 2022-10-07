@@ -3,52 +3,34 @@
 #include "PhoneBook.hpp"
 #include <string>
 
+
+std::string get_input(std::string retry_mess, int flag)
+{
+    std::string input;
+   getline(std::cin, input);
+    while (input.empty() || (!(std::all_of(input.begin(), input.end(), ::isdigit)) && flag))
+    {
+        std::cout << retry_mess;
+        getline(std::cin, input);
+    }
+    return (input);
+}
+
 int PhoneBook::add(int index)
 {
     std::string input;
-    if (index > 9)
+    if (index > 7)
         index = 0;
     std::cout << "enter frist name: ";
-    getline(std::cin, input);
-    while (input.empty())
-    {
-        std::cout << "plase enter frist name: ";
-        getline(std::cin, input);
-    }
-    Contact_list[index].first_name = input;
-    // std::cout << "enter last name: ";
-    // getline(std::cin, input);
-    //  while (input.empty())
-    // {
-    //     std::cout <<"plase enter last name: ";
-    //     getline(std::cin, input);
-    // }
-    // Contact_list[index].last_name = input;
-    // std::cout << "enter nickname: ";
-    // getline(std::cin, input);
-    //  while (input.empty())
-    // {
-    //     std::cout <<"plase enter nickname: ";
-    //     getline(std::cin, input);
-    // }
-    // Contact_list[index].nickname = input;
-    // std::cout << "enter phone number: ";
-    // getline(std::cin, input);
-    //  while (input.empty())
-    // {
-    //     std::cout <<"plase enter phone number: ";
-    //     getline(std::cin, input);
-    // }
-    // Contact_list[index].phone_num = input;
-    // std::cout << "enter darkest secret: ";
-    // getline(std::cin, input);
-    //  while (input.empty())
-    // {
-    //     std::cout <<"plase enter darkest secret: ";
-    //     getline(std::cin, input);
-    // }
-    // Contact_list[index].darkest_secret = input;
-
+    Contact_list[index].first_name = get_input("plase enter first name: ", 0);
+    std::cout << "enter last name: ";
+    Contact_list[index].last_name = get_input("plase enter last name: ", 0);
+    std::cout << "enter nickname: ";
+    Contact_list[index].nickname = get_input("plase enter nickname: ", 0);
+    std::cout << "enter phone number: ";
+    Contact_list[index].phone_num = get_input("plase enter phone number: ", 1);
+    std::cout << "enter darkest secret: ";
+    Contact_list[index].darkest_secret = get_input("plase enter darkest secret: ", 0);
     return (index + 1);
 }
 
@@ -61,13 +43,16 @@ void PhoneBook::search(int size)
     show(id, size);
     std::cout << "choose an index: ";
     getline(std::cin, input);
-    while (input.empty() || !(std::all_of(input.begin(), input.end(), ::isdigit)))
+    while (input.empty() || !(std::all_of(input.begin(), input.end(), ::isdigit))
+            || std::stoi(input) > size)
     {
         std::cout << "plase retry a number: ";
         getline(std::cin, input);
     }
-    show(std::stoi(input), size);
+    id = std::stoi(input);
+    show(id, size);
 }
+
 void PhoneBook::show(int id, int size)
 {
     int i;
@@ -78,16 +63,11 @@ void PhoneBook::show(int id, int size)
     field_size[1] = 10;
     field_size[2] = 10;
     field_size[3] = 10;
-    // field_size[4] = 13;
-    // field_size[5] = 15;
-    std::cout << (id -1) <<std::endl;
     print_line_field(field_size, 4);
     print_content_in_field(FLAG_1 | FLAG_0, "index", 5);
     print_content_in_field(FLAG_2 | FLAG_0, "first name", 10);
     print_content_in_field(FLAG_2 | FLAG_0, "last name", 10);
     print_content_in_field(FLAG_3 | FLAG_0, "nickname", 10);
-    // print_content_in_field(FLAG_2 | FLAG_0, "phone number", 13);
-    // print_content_in_field(FLAG_3 | FLAG_0, "darkest secret", 15);
     print_line_field(field_size, 4);
     while (i < size)
     {
@@ -106,12 +86,11 @@ void PhoneBook::show(int id, int size)
             print_content_in_field(FLAG_2 | FLAG_4, Contact_list[i].last_name, 10);
             print_content_in_field(FLAG_3 | FLAG_4, Contact_list[i].nickname, 10);
         }
-        // print_content_in_field(FLAG_2 | FLAG_4, Contact_list[i].phone_num, 13);
-        // print_content_in_field(FLAG_3| FLAG_4, Contact_list[i].darkest_secret, 15);
         i++;
     }
     print_line_field(field_size, 4);
 }
+
 void PhoneBook::exit()
 {
     std::exit(EXIT_SUCCESS);
