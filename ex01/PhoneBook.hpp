@@ -1,3 +1,6 @@
+#ifndef __PHONEBOOK_H__
+#define __PHONEBOOK_H__
+
 #include<iostream>
 #include "Contact.hpp"
 #include<cstdint>
@@ -23,3 +26,4 @@ public:
 
 void    print_line_field(int *field_size, int column_size);
 void    print_content_in_field(uint8_t pos, std::string content, size_t size);
+#endif /*__PHONEBOOK__*/

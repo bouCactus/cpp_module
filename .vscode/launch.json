@@ -14,6 +14,7 @@
         {
             "type": "lldb",
             "request": "launch",
+    
             "name": "Debug",
             "program": "${workspaceFolder}/ex01/phone",
             "args": [],

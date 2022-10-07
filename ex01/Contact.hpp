@@ -1,4 +1,5 @@
-
+#ifndef __CONTACT_H__
+#define __CONTACT_H__
 #include<iostream>
 
 class Contact{
@@ -9,3 +10,4 @@ public:
     std::string phone_num;   
     std::string darkest_secret;
 };
+#endif /* __CONTACT_H__ */
