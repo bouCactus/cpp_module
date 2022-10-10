@@ -16,7 +16,7 @@
             "request": "launch",
     
             "name": "Debug",
-            "program": "${workspaceFolder}/ex01/phone",
+            "program": "${workspaceFolder}/day01/ex05/harl",
             "args": [],
             "cwd": "${workspaceFolder}"
         }
