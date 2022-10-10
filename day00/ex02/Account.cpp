@@ -8,7 +8,6 @@ int Account::_totalNbWithdrawals = 0;
 
 Account::Account()
 {
-    std::cout << "hey i am void" << std::endl;
 }
 Account::~Account()
 {
