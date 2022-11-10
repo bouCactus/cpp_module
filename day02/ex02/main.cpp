@@ -10,13 +10,16 @@ std::ostream& operator<<(std::ostream &out , const Fixed &Fnumber)
 int main()
 {
   Fixed a;
-  Fixed b(2);
-  Fixed resut;
-  Fixed sum(4.5f);
+  Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+  
+  std::cout << a << std::endl;
+  std::cout << ++a << std::endl;
+  std::cout << a << std::endl;
+  std::cout << a++ << std::endl;
+  std::cout << a << std::endl;
+  
+  std::cout << b << std::endl;
 
-  a = sum;
-  resut =  b + a;
-
-  std::cout  << resut << std::endl << a << std::endl << b << std::endl;
+  std::cout << Fixed::max( a, b ) << std::endl;
   return (0);
 }
