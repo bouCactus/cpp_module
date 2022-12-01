@@ -8,6 +8,7 @@ class Animal{
 
 public:
     Animal();
+    Animal(const Animal &obj);
     Animal(const std::string type);
     ~Animal();
     void setType(const std::string &type);
