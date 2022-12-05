@@ -1,29 +1,39 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void)
+ClapTrap::ClapTrap(void):
+_hitPoints(10),
+_energyPoints(10),
+_attackDamage(0)
 {
-    std::cout << "defluat constructor called" << std::endl;
+    std::cout << "ClapTrap defluat constructor called" << std::endl;
+    _hitPoints = 10;
+    _energyPoints = 10;
+    _attackDamage = 0;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-    std::cout << "Destructor called" << std::endl;
+    std::cout << "ClapTrap Destructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &copy)
 {
-    std::cout << "Copy constructor called" << std::endl;
+    std::cout << "ClapTrap Copy constructor called" << std::endl;
     *this = copy;
 }
 
-ClapTrap::ClapTrap(const std::string name) : _name(name)
+ClapTrap::ClapTrap(const std::string name) :
+_name(name),
+_hitPoints(10),
+_energyPoints(10),
+_attackDamage(0)
 {
 
 }
 
 ClapTrap &ClapTrap::operator = (const ClapTrap &copy)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "ClapTrap Copy assignment operator called" << std::endl;
     if (this !=  &copy)
     {
         this->_name = copy._name;

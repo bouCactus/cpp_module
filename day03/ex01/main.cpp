@@ -19,20 +19,20 @@ int main()
    fourth = two;
 
     std::cout << std::endl;
-    one.setHitPoints(10);
-    one.setEnergyPoints(10);
-    one.setAttackDamage(4);
-    two.setHitPoints(10);
-    two.setEnergyPoints(10);
-    two.setAttackDamage(3);
+    // one.setHitPoints(10);
+    // one.setEnergyPoints(10);
+    // one.setAttackDamage(4);
+    // two.setHitPoints(10);
+    // two.setEnergyPoints(10);
+    // two.setAttackDamage(3);
      printInfo(one);
     std::cout << std::endl;
     printInfo(two); 
     std::cout << "__________________BATTLEFIELD______________________" << std::endl << std::endl;
-    one.attack(two.getName());
+    // one.attack(two.getName());
     two.takeDamage(one.getAttackDamage());
     two.beRepaired(2);
-    two.attack(one.getName());
+    // two.attack(one.getName());
     one.takeDamage(two.getAttackDamage());
     two.beRepaired(2);
     two.beRepaired(2);

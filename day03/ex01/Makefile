@@ -1,5 +1,5 @@
 
-NAME = ClapTrap
+NAME = ScavTrap
 
 RM = rm -rf
 CXX = c++
