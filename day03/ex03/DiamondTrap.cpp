@@ -12,11 +12,11 @@ ClapTrap("someone")
     setAttackDamage(30);
 }
 
-DiamondTrap::DiamondTrap(std::string name)
-// ClapTrap(name.append("_clap_name")), _name(name)
+DiamondTrap::DiamondTrap(std::string name):
+ClapTrap(),_name(name)
 {
     std::cout << "DiamondTrap paramitraze constructor called" << std::endl;
-    this->_name = name;
+    // this->_name = name;
     ClapTrap::setName((name.append("_clap_name")));
     setHitPoints(100);
     setEnergyPoints(50);
@@ -50,4 +50,13 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap &copy)
 void DiamondTrap::whoAmI(void)
 {
     std::cout << "DiamondTrap name: \"" << _name << "\" ClapTrap name: \"" << ClapTrap::_name << "\""<< std::endl;
+}
+
+void DiamondTrap::setName(const std::string name)
+{
+    this->_name = name;
+}
+std::string DiamondTrap::getName(void)const
+{
+    return (this->_name);
 }

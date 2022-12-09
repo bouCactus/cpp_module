@@ -52,10 +52,15 @@ int main()
 //     std::cout << std::endl;
 
 DiamondTrap ayoub("ayoub");
-// ayoub.setName("cat");
+ayoub.setName("cat");
+ayoub.ClapTrap::setName("Dog");
+ClapTrap *p = new DiamondTrap("cow");
 
 printInfo(ayoub);
+std::cout << "eng" << ayoub.getAttackDamage() << std::endl;
     
     ayoub.whoAmI();
+    std::cout << "name ::" << p->getName() << std::endl;
+    std::cout << "naem two:: " << p->ClapTrap::getName() << std::endl;
     return (0);
 }
