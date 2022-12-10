@@ -21,6 +21,15 @@ ScavTrap::ScavTrap(const ScavTrap& copy)
      *this = copy;
 }
 
+ScavTrap::ScavTrap(const std::string name):
+ClapTrap(name)
+
+{
+    this->setName(name);
+    this->setHitPoints(100);
+    this->setEnergyPoints(100);
+    this->setAttackDamage(20);
+}
 ScavTrap &ScavTrap::operator= (const ScavTrap & copy)
 {
    

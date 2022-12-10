@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 void printInfo(const ClapTrap &player)
 {
@@ -15,19 +16,22 @@ int main()
    ClapTrap two("two");
    ClapTrap three(one);
    ClapTrap fourth;
+   ScavTrap ready("test");
+   ScavTrap go;
 
    fourth = two;
 
     std::cout << std::endl;
-    // one.setHitPoints(10);
-    // one.setEnergyPoints(10);
-    // one.setAttackDamage(4);
-    // two.setHitPoints(10);
-    // two.setEnergyPoints(10);
-    // two.setAttackDamage(3);
+    one.setHitPoints(10);
+    one.setEnergyPoints(10);
+    one.setAttackDamage(4);
+    two.setHitPoints(10);
+    two.setEnergyPoints(10);
+    two.setAttackDamage(3);
      printInfo(one);
     std::cout << std::endl;
-    printInfo(two); 
+    printInfo(two);
+    printInfo(ready);
     std::cout << "__________________BATTLEFIELD______________________" << std::endl << std::endl;
     // one.attack(two.getName());
     two.takeDamage(one.getAttackDamage());
@@ -36,6 +40,7 @@ int main()
     one.takeDamage(two.getAttackDamage());
     two.beRepaired(2);
     two.beRepaired(2);
+    ready.guardGate();
     std::cout << "_________________________________________" << std::endl;
     printInfo(one);
     std::cout << std::endl;

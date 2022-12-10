@@ -12,7 +12,7 @@ class ClapTrap{
         unsigned int         _attackDamage;
     public:
         ClapTrap(void);
-        ~ClapTrap(void);
+        virtual ~ClapTrap(void); // why? wlah ma3art
         ClapTrap(const ClapTrap &copy);
         ClapTrap(const std::string name);
 

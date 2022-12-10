@@ -1,18 +1,18 @@
 #include"Animal.hpp"
-#include"Dog.hpp"
+#include"Cat.hpp"
 #include<iostream>
 
-Dog::Dog()
+Cat::Cat()
 {
-    setType("Dog");
+    setType("Cat");
     std::cout << this->_type << " defult constructor called" << std::endl;
 }
-Dog::~Dog()
+Cat::~Cat()
 {
     std::cout << this->_type << " distructor called" << std::endl;
 }
 
-void Dog::makeSound( void ) const
+void Cat::makeSound( void ) const
 {
-    std::cout << this->_type << ": wuff ouff owff wowff" << std::endl;
+    std::cout << this->_type << " meow EEEEEEAAAAAAAAAAAAAAARRRRRRRRR" << std::endl;
 }
