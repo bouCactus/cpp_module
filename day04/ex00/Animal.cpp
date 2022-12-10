@@ -1,9 +1,9 @@
 #include "Animal.hpp"
 #include <iostream>
 
-Animal::Animal()
+Animal::Animal():_type("Undefind type Animal")
 {
-    std::cout << "Animal defluat constructor called" << std::endl;
+    std::cout << "Animal: defluat constructor called" << std::endl;
 }
 
 Animal::Animal(const std::string type) : _type(type)
@@ -12,20 +12,20 @@ Animal::Animal(const std::string type) : _type(type)
 
 Animal::~Animal()
 {
-    std::cout << "distructor called" << std::endl;
+    std::cout << "Animal: distructor called" << std::endl;
 }
 
 void Animal::setType(const std::string &type)
 {
-    _type = type;
+    this->_type = type;
 }
 
 std::string Animal::getType(void) const
 {
-    return (_type);
+    return (this->_type);
 }
 
 void Animal::makeSound() const
 {
-    std::cout << "Animal undefind sound" << std::endl;
+    std::cout << this->_type << ": undefind sound" << std::endl;
 }

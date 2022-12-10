@@ -5,14 +5,14 @@
 Dog::Dog()
 {
     setType("Dog");
-    std::cout << _type << " defult constructor called" << std::endl;
+    std::cout << this->_type << " defult constructor called" << std::endl;
 }
 Dog::~Dog()
 {
-    std::cout << _type << " distructor called" << std::endl;
+    std::cout << this->_type << " distructor called" << std::endl;
 }
 
 void Dog::makeSound( void ) const
 {
-    std::cout << _type << " sound of Dog in on" << std::endl;
+    std::cout << this->_type << " wuff ouff owff wowff" << std::endl;
 }

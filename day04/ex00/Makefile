@@ -4,7 +4,7 @@ NAME = poly
 RM = rm -rf
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
-SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp
+SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp
 CXXOBJ = $(SRCS:.cpp=.o)
 
 .cpp.o:

@@ -10,7 +10,7 @@ public:
     WrongCat();
     WrongCat(const WrongCat & instance);
     ~WrongCat();
-    void makeSound();
+    void makeSound(void)const;
 };
 
 #endif
