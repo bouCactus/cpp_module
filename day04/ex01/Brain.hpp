@@ -1,10 +1,7 @@
 
 
-#ifndef __BRIAN_H__
+#ifndef __BRAIN_H__
 #define __BRAIN_H__
-#include "Animal.hpp"
-#include "Cat.hpp"
-#include "Dog.hpp"
 #include <iostream>
 class Brain{
 public:

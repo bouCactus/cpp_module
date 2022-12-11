@@ -14,7 +14,21 @@ WrongAnimal::WrongAnimal(const std::string type) : _type(type)
 
 WrongAnimal::~WrongAnimal()
 {
-    std::cout << "WrongAnimal: distructor called" << std::endl;
+    std::cout << "WrongAnimal: destructor called" << std::endl;
+}
+
+WrongAnimal::WrongAnimal(const WrongAnimal &copy)
+{
+    *this = copy;
+}
+
+WrongAnimal &WrongAnimal::operator= (const WrongAnimal &copy)
+{
+    if (this != &copy)
+    {
+        this->_type = copy._type;
+    }
+    return (*this);
 }
 
 void WrongAnimal::setType(const std::string &type)

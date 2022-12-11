@@ -9,10 +9,22 @@ Animal::Animal():_type("Undefind type Animal")
 Animal::Animal(const std::string type) : _type(type)
 {
 }
+Animal::Animal(const Animal &copy)
+{
+    *this = copy;
+}
+Animal &Animal::operator= (const Animal &copy)
+{
+    if (this != &copy)
+    {
+        this->_type = copy._type;        
+    }
+    return (*this);
+}
 
 Animal::~Animal()
 {
-    std::cout << "Animal: distructor called" << std::endl;
+    std::cout << "Animal: destructor called" << std::endl;
 }
 
 void Animal::setType(const std::string &type)
