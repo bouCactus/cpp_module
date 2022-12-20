@@ -1,6 +1,5 @@
 #include "Bureaucrat.hpp"
 
-
 Bureaucrat::Bureaucrat(void):
 _name("none"),
 _grade(150)
@@ -33,7 +32,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
 
 Bureaucrat::~Bureaucrat(void)
 {
-    std::cout << "destructor called" << std::endl;
+    std::cout << "Bureaucrat: destructor called" << std::endl;
 }
 
 std::string Bureaucrat::getName(void)const
@@ -49,6 +48,11 @@ int Bureaucrat::getGrade(void) const
 void Bureaucrat::setName(std::string name)
 {
     this->_name = name;
+}
+
+void    Bureaucrat::setGrade(int grade)
+{
+    this->_grade = grade;
 }
 
 void Bureaucrat::incrementGrade(void)
@@ -83,9 +87,9 @@ std::ostream& operator<< (std::ostream& out, const Bureaucrat &obj)
     return (out);
 }
 
-void  Bureaucrat::signForm()
+void  Bureaucrat::signForm( Form &form)
 {
-    Form form(this->getName() + "form");
+    // Form form(this->getName() + "form");
     try{
         form.beSigned(*this);
         std::cout << this->getName() << " bureaucrat signed " << form.getName();
@@ -93,7 +97,7 @@ void  Bureaucrat::signForm()
    catch(std::exception &e)
    {
         std::cout << this->getName() << " bureaucrat couldn't sign " << form.getName()
-        << "because" << e.what();
+        << " because " << e.what();
    }
 
 }

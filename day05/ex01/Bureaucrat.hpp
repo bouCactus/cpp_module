@@ -4,7 +4,7 @@
 #include <iostream>
 #include <exception>
 #include "Form.hpp"
-
+class Form;
 class Bureaucrat{
 public:
     Bureaucrat();
@@ -18,7 +18,7 @@ public:
     void        setGrade(int grade);
     void        incrementGrade(void);
     void        decrementGrade(void);
-    void        signForm();
+    void        signForm(Form &form);
     struct      GradeTooHighException : public std::exception
     {
         const char *what()const _NOEXCEPT;

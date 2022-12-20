@@ -3,18 +3,18 @@
 
 Form::Form(void):
 _name("none"),
+_status(false),
 _signRequired(10),
-_executionRequired(13),
-_status(false)
+_executionRequired(13)
 {
     std::cout << "Form: defualt constructor called" << std::endl;
 }
 
 Form::Form(std::string name):
 _name(name),
+_status(false),
 _signRequired(10),
-_executionRequired(13),
-_status(false)
+_executionRequired(13)
 {
     std::cout << "Form: parameterized  constructor called" << std::endl;
 }
@@ -40,19 +40,16 @@ Form &Form::operator=(const Form &copy)
 
 Form::~Form(void)
 {
-    std::cout << "destructor called" << std::endl;
+    std::cout << "Form: destructor called" << std::endl;
 }
 
 void Form::beSigned(Bureaucrat &obj)
 {
-    if (obj.getGrade() > 150)
-        throw Form::GradeTooLowException();
     if (obj.getGrade() < 1)
         throw Form::GradeTooHighException();
-    if (obj.getGrade() >= this->_signRequired)
-        _status = true;
-    else
-        throw Form::gradeTooHighException();
+    if (obj.getGrade() > 150 || obj.getGrade() > this->_signRequired)
+        throw Form::GradeTooLowException();
+    _status = true;
 }
 
 const char* Form::GradeTooHighException::what() const _NOEXCEPT
@@ -83,12 +80,12 @@ bool Form::getStatus(void)const
     return (this->_status);
 }
 
-const int Form::getSignRequired(void) const
+int Form::getSignRequired(void) const
 {
     return (this->_signRequired);
 }
 
-const int Form::getExecutionRequired(void) const
+int Form::getExecutionRequired(void) const
 {
     return (this->_executionRequired);
 }

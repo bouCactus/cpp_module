@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 #include <exception>
-
+class Bureaucrat;
 class Form{
 public:
     Form(void);
@@ -16,8 +16,8 @@ public:
     void            beSigned(Bureaucrat &obj);
     std::string     getName(void) const;
     bool            getStatus(void) const;
-    const int       getSignRequired(void) const;
-    const int       getExecutionRequired(void) const;
+    int             getSignRequired(void) const;
+    int             getExecutionRequired(void) const;
     struct      GradeTooHighException : public std::exception
     {
         const char *what()const _NOEXCEPT;
