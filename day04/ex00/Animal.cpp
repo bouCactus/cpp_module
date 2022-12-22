@@ -15,6 +15,20 @@ Animal::~Animal()
     std::cout << "Animal: distructor called" << std::endl;
 }
 
+Animal::Animal(const Animal &copy)
+{
+    *this = copy;
+}
+
+Animal &Animal::operator= (const Animal &copy)
+{
+    if (this != &copy)
+    {
+        this->_type = copy._type;        
+    }
+    return (*this);
+}
+
 void Animal::setType(const std::string &type)
 {
     this->_type = type;

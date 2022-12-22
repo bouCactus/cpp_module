@@ -7,9 +7,9 @@ int main(void)
     Form theform("theform");
 
     try{
-        for (int i = 0 ; i < 153 ; i++)
-            one.decrementGrade();
-        one.setGrade(155);
+        // for (int i = 0 ; i < 153 ; i++)
+        //     one.decrementGrade();
+        one.setGrade(130);
         one.signForm(theform);
         std::cout << one << std::endl;
     }

@@ -10,14 +10,7 @@ _executionRequired(13)
     std::cout << "Form: defualt constructor called" << std::endl;
 }
 
-Form::Form(std::string name):
-_name(name),
-_status(false),
-_signRequired(10),
-_executionRequired(13)
-{
-    std::cout << "Form: parameterized  constructor called" << std::endl;
-}
+
 
 Form::Form(const Form &copy):
 _signRequired(10),
@@ -29,10 +22,11 @@ _executionRequired(13)
 
 Form::Form(std::string name, int signRequired, int executionRequired):
 _name(name),
+_status(false),
 _signRequired(signRequired),
 _executionRequired(executionRequired)
 {
-    
+   std::cout << "Form: parameterized  constructor called" << std::endl; 
 }
 Form &Form::operator=(const Form &copy)
 {
@@ -69,6 +63,8 @@ const char* Form::GradeTooLowException::what() const _NOEXCEPT
     return ("the gade is too low");
 }
 
+
+
 std::ostream& operator<< (std::ostream& out, const Form &obj)
 {
     out << obj.getName() << ", Form status " << obj.getStatus() << " "
@@ -97,3 +93,12 @@ int Form::getExecutionRequired(void) const
     return (this->_executionRequired);
 }
 
+void Form::execute(Bureaucrat const &executor) const
+{
+
+    if (!this->getStatus())
+        throw "the bureaucrat not sign to the From!";
+    if (executor.getGrade() > this->getExecutionRequired())
+        throw Form::GradeTooLowException();
+    this->executeRequest(executor.getName());
+}

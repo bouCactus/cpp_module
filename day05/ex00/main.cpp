@@ -3,10 +3,10 @@
 
 int main(void)
 {
-    Bureaucrat one("one");
     try{
+        Bureaucrat one("one", 300);
         // for (int i = 0 ; i < 153 ; i++)
-            // one.decrementGrade();
+        // one.decrementGrade();
         std::cout << one << std::endl;
     }
     catch(std::exception &e)

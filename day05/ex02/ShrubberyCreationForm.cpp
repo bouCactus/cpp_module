@@ -2,10 +2,10 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(void):
+ShrubberyCreationForm::ShrubberyCreationForm(void) : 
 Form("none", 145, 137)
 {
-    std::cout << "ShrubberyCreationForm: defualt constructor called" <<std::endl;
+    std::cout << "ShrubberyCreationForm: defualt constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy)
@@ -23,39 +23,30 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 {
     if (this != &copy)
     {
-        //Do nothing , since all member private
-        // Do nothing, since *all member is a const variable and cannot be modified
+        // Do nothing , since all member private
+        //  Do nothing, since *all member is a const variable and cannot be modified
     }
     return (*this);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string &name):
-Form(name, 145, 137)
-{
-    std::cout << "ShrubberyCreationForm: parameterized constructor called"<<std::endl;
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(std::string &name, int signRequired, int executionRequired):
+ShrubberyCreationForm::ShrubberyCreationForm(std::string &name, int signRequired, int executionRequired) : 
 Form(name, signRequired, executionRequired)
 {
-    std::cout << "ShrubberyCreationForm: parameterized constructor called"<<std::endl;
+    std::cout << "ShrubberyCreationForm: parameterized constructor called" << std::endl;
 }
 
 
-
-void ShrubberyCreationForm::execute(Bureaucrat const &bureaucrat)const
+void ShrubberyCreationForm::executeRequest(std::string target) const
 {
-   std::ofstream outdata;
-   std::string tree;
-
-   outdata.open(this->getName().append("Shrubery"));
-   if (!outdata)
-   {
+    std::ofstream outdata;
+    std::string tree;
+    outdata.open(target.append("Shrubery"));
+    if (!outdata)
+    {
         std::cerr << "Error: file could not be opened" << std::endl;
         exit(1);
-   }
-   //autdata << something
-      tree ="\n\
+    }
+    tree = "\n\
      ccee88oo\n\
   C8O8O8Q8PoOb o8oo\n\
  dOB69QO8PdUOpugoO9bD\n\
@@ -67,7 +58,6 @@ CgggbU8OU qOp qOdoUOdcb\n\
          |||\\/\n\
          |||||\n\
    .....//||||\\....\n";
-   outdata << tree ;
-   outdata.close();
-
+    outdata << tree;
+    outdata.close();
 }

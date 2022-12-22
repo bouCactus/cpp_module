@@ -27,6 +27,20 @@ std::string WrongAnimal::getType(void) const
     return (this->_type);
 }
 
+WrongAnimal::WrongAnimal(const WrongAnimal &copy)
+{
+    *this = copy;
+}
+
+WrongAnimal &WrongAnimal::operator= (const WrongAnimal &copy)
+{
+    if (this != &copy)
+    {
+        this->_type = copy._type;
+    }
+    return (*this);
+}
+
 void WrongAnimal::makeSound() const
 {
     std::cout << this->_type << ": undefind sound" << std::endl;

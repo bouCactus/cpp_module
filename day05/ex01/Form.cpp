@@ -10,16 +10,16 @@ _executionRequired(13)
     std::cout << "Form: defualt constructor called" << std::endl;
 }
 
-Form::Form(std::string name):
+Form::Form(std::string name, int signRequired, int executionRequired):
 _name(name),
 _status(false),
-_signRequired(10),
-_executionRequired(13)
+_signRequired(signRequired),
+_executionRequired(executionRequired)
 {
     std::cout << "Form: parameterized  constructor called" << std::endl;
 }
 
-Form::Form(const Form &copy):
+Form::Form(const Form &copy) : 
 _signRequired(10),
 _executionRequired(13)
 {

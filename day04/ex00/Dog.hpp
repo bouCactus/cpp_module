@@ -9,6 +9,8 @@ public:
     Dog();
     Dog(const Dog &obj);
     ~Dog();
+
+    Dog &operator= (const Dog &copy);
     void makeSound()const;
 
 };

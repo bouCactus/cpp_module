@@ -9,17 +9,17 @@ class Bureaucrat;
 class Form{
 public:
     Form(void);
-    Form(std::string name);
     Form(std::string name, int signRequired, int executionRequired);
     Form(const Form &copy);
     ~Form(void);
     Form    &operator=(const Form &copy);
     void            beSigned(Bureaucrat &obj);
-    virtual void    execute(Bureaucrat const & executor) const = 0;
+    void            execute(Bureaucrat const & executor) const;
     std::string     getName(void) const;
     bool            getStatus(void) const;
     int             getSignRequired(void) const;
     int             getExecutionRequired(void) const;
+    virtual void    executeRequest(std::string target) const = 0;
     struct      GradeTooHighException : public std::exception
     {
         const char *what()const _NOEXCEPT;
@@ -28,6 +28,7 @@ public:
     {
         const char *what() const _NOEXCEPT;
     };
+
 private:
     const std::string   _name;
     bool                _status;

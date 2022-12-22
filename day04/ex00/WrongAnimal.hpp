@@ -7,10 +7,11 @@
 class WrongAnimal{
 
 public:
-   WrongAnimal();
-    WrongAnimal(const Animal &obj);
+    WrongAnimal();
+    WrongAnimal(const WrongAnimal &copy);
     WrongAnimal(const std::string type);
     ~WrongAnimal();
+    WrongAnimal &operator= (const WrongAnimal &copy);
     void setType(const std::string &type);
     std::string getType( void ) const;
     void makeSound( void ) const;

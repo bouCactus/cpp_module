@@ -9,7 +9,7 @@ class Bureaucrat;
 class Form{
 public:
     Form(void);
-    Form(std::string name);
+    Form(std::string name, int signRequired, int executionRequired);
     Form(const Form &copy);
     ~Form(void);
     Form    &operator=(const Form &copy);

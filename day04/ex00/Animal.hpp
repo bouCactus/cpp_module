@@ -8,9 +8,11 @@ class Animal{
 
 public:
     Animal();
-    Animal(const Animal &obj);
+    Animal(const Animal &copy);
     Animal(const std::string type);
     ~Animal();
+
+    Animal &operator = (const Animal &copy);
     void setType(const std::string &type);
     std::string getType( void ) const;
     virtual void makeSound( void )const;

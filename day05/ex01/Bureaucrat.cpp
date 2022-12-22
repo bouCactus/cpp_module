@@ -12,10 +12,14 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy)
     std::cout << "Bureaucrat: copy constructor called" << std::endl;
     *this = copy;
 }
-Bureaucrat::Bureaucrat(std::string name):
+Bureaucrat::Bureaucrat(std::string name, int grade) :
 _name(name),
-_grade(150)
+_grade(grade)
 {
+    if ((this->_grade - 1) < 1)
+        throw Bureaucrat::GradeTooHighException();
+    if ((this->_grade + 1) > 150)
+        throw Bureaucrat::GradeTooLowException();
     std::cout << "Bureaucrat: parameterized constructor called" << std::endl;
 }
 
