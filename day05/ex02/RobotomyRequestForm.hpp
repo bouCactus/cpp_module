@@ -11,7 +11,7 @@ public:
     RobotomyRequestForm(void);
     RobotomyRequestForm(const RobotomyRequestForm &copy);
     ~RobotomyRequestForm(void);
-    RobotomyRequestForm(std::string &name, int signRequired, int executionRequired);
+    RobotomyRequestForm(std::string name, int signRequired, int executionRequired);
     RobotomyRequestForm &operator=(const RobotomyRequestForm &copy);
     void executeRequest(std::string target)const ;
 private:     

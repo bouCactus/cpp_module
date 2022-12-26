@@ -11,7 +11,7 @@ public:
     ShrubberyCreationForm(void);
     ShrubberyCreationForm(const ShrubberyCreationForm &copy);
     ~ShrubberyCreationForm(void);
-    ShrubberyCreationForm(std::string &name, int signRequired, int executionRequired);
+    ShrubberyCreationForm(std::string name, int signRequired, int executionRequired);
     ShrubberyCreationForm &operator=(const ShrubberyCreationForm &copy);
     void executeRequest(std::string target)const ;
 private:     

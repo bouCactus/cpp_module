@@ -1,20 +1,23 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include"RobotomyRequestForm.hpp"
 
 int main(void)
 {   
-    std::string name = "theform";
+    std::string name = "ayoub";
     Bureaucrat one("someone", 2);
-    ShrubberyCreationForm theform(name, 10, 2);
+    // theform(name, 10, 2)
+    // Form *a = new RobotomyRequestForm("ayoub", 15, 10);
+    Form *a = new ShrubberyCreationForm("ayoub", 14, 15);
 
     try{
         // for (int i = 0 ; i < 153 ; i++)
         //     one.decrementGrade();
         // one.setGrade(155);
-        one.signForm(theform);
+        one.signForm(*a);
         // std::cout << one << std::endl;
-        one.executeForm(theform);
+        one.executeForm(*a);
     }
     catch(std::exception &e)
     {

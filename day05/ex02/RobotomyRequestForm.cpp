@@ -1,6 +1,5 @@
 
 #include "RobotomyRequestForm.hpp"
-#include <fstream>
 
 RobotomyRequestForm::RobotomyRequestForm(void) : 
 Form("none", 145, 137)
@@ -29,7 +28,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &c
     return (*this);
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string &name, int signRequired, int executionRequired) : 
+RobotomyRequestForm::RobotomyRequestForm(std::string name, int signRequired, int executionRequired) : 
 Form(name, signRequired, executionRequired)
 {
     std::cout << "RobotomyRequestForm: parameterized constructor called" << std::endl;
@@ -38,5 +37,21 @@ Form(name, signRequired, executionRequired)
 
 void RobotomyRequestForm::executeRequest(std::string target) const
 {
-   
+    int timePeriod = 3600;// second;
+    double number;
+    
+    srand(time(NULL));
+    number = rand() % timePeriod;
+    if (number > (timePeriod / 2))
+    {
+        std::cout << "\a";
+        std::cout << "      ~~~~" << std::endl;
+        std::cout << " . ~~ . ~~ .... ~" << std::endl;
+        std::cout << " ......~~~ ~~~ ~~~ ~~ ~~ ~..." << std::endl;
+        std::cout << target << " has been robotomized successfully" << std::endl;
+    }
+    else
+    {
+        std::cout << target << "Robotomy failed" << std::endl;
+    }
 }

@@ -29,7 +29,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
     return (*this);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string &name, int signRequired, int executionRequired) : 
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name, int signRequired, int executionRequired) : 
 Form(name, signRequired, executionRequired)
 {
     std::cout << "ShrubberyCreationForm: parameterized constructor called" << std::endl;

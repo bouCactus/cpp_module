@@ -100,5 +100,5 @@ void Form::execute(Bureaucrat const &executor) const
         throw "the bureaucrat not sign to the From!";
     if (executor.getGrade() > this->getExecutionRequired())
         throw Form::GradeTooLowException();
-    this->executeRequest(executor.getName());
+    this->executeRequest(this->getName());
 }
