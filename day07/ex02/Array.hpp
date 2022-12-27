@@ -13,7 +13,7 @@ public:
     Array(const Array<T> &copy);
     ~Array(void);
     Array &operator=(const Array &copy);
-    T &operator[](unsigned int i) const;
+    T &operator[](int i) const;
     size_t size() const _NOEXCEPT;
     struct UnderFlowException : public std::exception
     {
@@ -62,7 +62,7 @@ Array<T> &Array<T>::operator=(const Array<T> &copy)
     std::cout << "Array copy assignement called" << std::endl;
     if (this != &copy)
     {
-        delete [] this->_arr;
+        // delete [] this->_arr;
         this->_arr = new T[copy.size()];
         this->_size = copy.size();
         for (size_t i = 0; i < copy.size(); i++)
@@ -72,9 +72,9 @@ Array<T> &Array<T>::operator=(const Array<T> &copy)
 }
 
 template <typename T>
-T &Array<T>::operator[](unsigned int i) const
+T &Array<T>::operator[](int i) const
 {
-    if (i >= this->_size)
+    if (i >= (int)this->_size)
         throw Array<T>::OverFlowException();
     if (i < 0)
         throw Array<T>::UnderFlowException();
