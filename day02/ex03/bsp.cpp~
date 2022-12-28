@@ -1,0 +1,10 @@
+#include "Fixed.hpp"
+#include "Point.hpp"
+
+
+
+bool bsp(Point a, Point b, Point c, Point point)
+{
+  std::cout << "this function does not implmented yet" << std::endl;
+  return (true);
+}

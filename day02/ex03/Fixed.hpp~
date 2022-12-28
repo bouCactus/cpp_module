@@ -42,5 +42,4 @@ private:
   int              fNumber;
   static const int fractionBite = 8;
 };
-std::ostream& operator<<(std::ostream &out , const Fixed &Fnumber);
 #endif

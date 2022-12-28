@@ -32,7 +32,7 @@ Fixed::Fixed(float const num)
 
 Fixed::~Fixed()
 {
-  std::cout << "deleted" << std::endl;
+  //  std::cout << "deleted" << std::endl;
 }
 
 int    Fixed::getRawBits(void)const
