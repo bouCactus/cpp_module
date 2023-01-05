@@ -93,8 +93,6 @@ int main(int argc, char *argv[])
       {
 	std::cout << "======================================================" << std::endl;
 	number = checkinput(argv[1]);
-	std::cout << "number: "<< number << std::endl;
-	
 	character(static_cast<char>(number), number);
 	integer(static_cast<int>(number), number);
 	con_float(static_cast<float>(number), number);
