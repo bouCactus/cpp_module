@@ -10,7 +10,7 @@ int easyfind(T contianer, int number)
   typename T::iterator it;
   it = find(contianer.begin(), contianer.end(), number);
   if (it == contianer.end())
-    throw ("the element not found");
+    throw (number);
   return *it ;
 }
 #endif

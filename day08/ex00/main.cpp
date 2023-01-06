@@ -6,28 +6,31 @@
 
 int main()
 {
-  std::vector<int> ar;
-  std::list<int> listo;
+  std::vector<int> vec;
+  std::list<int> lst;
 
-  ar.push_back(1);
-  ar.push_back(2);
-  ar.push_back(3);
-  ar.push_back(4);
+  vec.push_back(1);
+  vec.push_back(2);
+  vec.push_back(3);
+  vec.push_back(4);
 
-  listo.push_back(2);
-  listo.push_back(3);
-  listo.push_back(4);
+  lst.push_back(2);
+  lst.push_back(3);
+  lst.push_back(4);
   try
     {
-      int go = easyfind(ar, 3);
-      std::cout << "the return: " << go << std::endl;
-      int li = easyfind(listo,4);
-      std::cout << "the easyfind found the number: " << li << std::endl;
-      go = easyfind(listo, 1);
+      int val = easyfind(vec, 2);
+      std::cout << "easyfind found the element " << val
+		<< " in the container" << std::endl;
+      val = easyfind(lst, 4);
+      std::cout << "easyfind found the element " << val
+		<< " in the container" << std::endl;
+      val = easyfind(lst, 0);
     }
-  catch(char const *str)
+  catch(int num)
     {
-      std::cout << str << std::endl;
+      std::cout << "easyfind could not find the element "
+		<< num << " in the container"<<  std::endl;
     }
   return (0);
 }
