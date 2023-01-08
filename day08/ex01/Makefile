@@ -1,9 +1,9 @@
 
-NAME=easyfind
-RM = rm -rf
+NAME = span
+RM  = rm -rf
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp 
+SRCS = main.cpp Span.cpp
 CXXOBJS = $(SRCS:.cpp=.o)
 
 .cpp.o:
@@ -11,10 +11,8 @@ CXXOBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-
 $(NAME): $(CXXOBJS)
 	$(CXX) $(CXXFLAGS) $(CXXOBJS) -o $(NAME)
-
 clean:
 	$(RM) $(CXXOBJS)
 
