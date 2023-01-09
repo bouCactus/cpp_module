@@ -41,15 +41,21 @@ void PhoneBook::search(int size)
 
     id = 0;
     show(id, size);
-    std::cout << "choose an index: ";
+    std::cout << "#choose an index: ";
     getline(std::cin, input);
     while (input.empty() || !(std::all_of(input.begin(), input.end(), ::isdigit))
-            || std::stoi(input) > size)
-    {
-        std::cout << "plase retry a number: ";
+	   || input.length() > 1){
+      //      if (size == 0)
+
+        std::cout << "#plase retry a number: ";
         getline(std::cin, input);
     }
     id = std::stoi(input);
+    if (id > size){
+      std::cout << "the number out of range!" << std::endl;
+      std::cout << "or the PhoneBook is empty" << std::endl;
+      return ;
+    }
     show(id, size);
 }
 

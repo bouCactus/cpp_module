@@ -5,13 +5,13 @@
 void print_line_field(int *field_size, int column_size)
 {
     int index;
-    int width;
+    //    int width;
 
     index = 0;
     std::cout << "+";
     while (index < column_size)
     {
-        width = 0;
+      //        width = 0;
         if (field_size[index] <= 10)
             field_size[index] = 11;
         std::cout << std::setfill('-') << std::setw(field_size[index] + 1);
@@ -25,8 +25,8 @@ void print_line_field(int *field_size, int column_size)
 
 void print_content_in_field(uint8_t pos, std::string content, size_t size)
 {
-    size_t width;
-    width = 0;
+  //    size_t width;
+  //    width = 0;
     if (pos & FLAG_1)
         std::cout << "|";
     if (size <= 10)
