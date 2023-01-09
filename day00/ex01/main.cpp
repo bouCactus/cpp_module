@@ -1,32 +1,29 @@
 #include <iostream>
 #include"PhoneBook.hpp"
-
-int main()
+void help_info(void)
 {
-    
-    int index;
-    int list_size;
-    std::string command;
-    std::string dummy;
-    PhoneBook phone;
-
     std::cout << "List of commands: " << std::endl;
     std::cout << "ADD     : save a new contact" <<std::endl;
     std::cout << "SEARCH  : display a specific contact" << std::endl;
     std::cout << "EXIT    : quits the program " << std::endl;
     std::cout << "ifo     : if you exit, your contacts will be lost forever" <<std::endl;
     std::cout << std::endl;
+}
+int main()
+{
+    std::string command;
+    PhoneBook phone;
+
+    help_info();
     std::cout << "command: ";
-    index = 0;
-    list_size = 0;
+    phone.setIndex(0);
+    phone.setCapacity(0);
     while (getline(std::cin, command)){
       if (!command.compare("ADD")){
-	index = phone.add(index);
-	if (list_size < 8)
-	  list_size++;
+	        phone.add();
       }
       if (!command.compare("SEARCH"))
-	phone.search(list_size);
+	      phone.search();
       if (!command.compare("EXIT"))
 	phone.exit();
       std::cout << "command: ";
