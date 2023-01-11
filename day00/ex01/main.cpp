@@ -1,32 +1,24 @@
 #include <iostream>
 #include"PhoneBook.hpp"
-void help_info(void)
-{
-    std::cout << "List of commands: " << std::endl;
-    std::cout << "ADD     : save a new contact" <<std::endl;
-    std::cout << "SEARCH  : display a specific contact" << std::endl;
-    std::cout << "EXIT    : quits the program " << std::endl;
-    std::cout << "ifo     : if you exit, your contacts will be lost forever" <<std::endl;
-    std::cout << std::endl;
-}
+
 int main()
 {
-    std::string command;
-    PhoneBook phone;
+    std::string userCommand;
+    PhoneBook Contacts;
 
-    help_info();
-    std::cout << "command: ";
-    phone.setIndex(0);
-    phone.setCapacity(0);
-    while (getline(std::cin, command)){
-      if (!command.compare("ADD")){
-	        phone.add();
+    Contacts.printHelp();
+    std::cout << "\033[1;32mcommand: \033[0m";
+    while (getline(std::cin, userCommand)){
+      if (!userCommand.compare("ADD")){
+	        Contacts.addContact();
       }
-      if (!command.compare("SEARCH"))
-	      phone.search();
-      if (!command.compare("EXIT"))
-	phone.exit();
-      std::cout << "command: ";
+      else if  (!userCommand.compare("SEARCH"))
+	      Contacts.searchContacts();
+      else if (!userCommand.compare("EXIT"))  
+	      Contacts.exitProgram();
+      else
+            std::cout << "\033[1;31mInvalid command. Please try again.\033[0m" << std::endl;
+      std::cout << "\033[1;32mcommand: \033[0m";
     }
     return (0);
 }
