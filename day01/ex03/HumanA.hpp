@@ -5,20 +5,13 @@
 #include "Weapon.hpp"
 
 class HumanA{
-public: 
-
-/* 
-    should remove the consturctor because the weapon is a pointer
-    and in none parameterized constructor compiler said 
-    "must explicitly initialize the reference member "
-*/
-    HumanA();
+public:
     HumanA(std::string name, Weapon &weapon);
     ~HumanA();
     void attack();
+
 private:
     Weapon &_weapon;
     std::string _name;
-
 };
-#endif
+#endif // _HUMANA_H_
