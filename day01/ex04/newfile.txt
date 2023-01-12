@@ -1,3 +1,0 @@
-You should provide the exact hey of the file to the open() method. Also,
- if you are using the Windows operating system, make sure to follow proper
-  file address conventions (Windows uses forward slash (‘\’) in filenames). 
