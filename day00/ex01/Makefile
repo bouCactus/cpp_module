@@ -1,10 +1,10 @@
 
-NAME = phone
+NAME = phoneBook
 
 RM = rm -rf
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
-SRCS = main.cpp PhoneBook.cpp show.cpp
+SRCS = main.cpp PhoneBook.cpp phoneBookPrinter.cpp Contact.cpp
 CXXOBJ = $(SRCS:.cpp=.o)
 
 .cpp.o:
