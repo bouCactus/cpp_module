@@ -1,5 +1,5 @@
 
-NAME = globalba
+NAME = AccountSimulation
 
 RM = rm -rf
 CXX = c++
