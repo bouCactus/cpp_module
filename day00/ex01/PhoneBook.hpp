@@ -4,11 +4,14 @@
 #include <iostream>
 #include "Contact.hpp"
 #include <cstdint>
+
 #define HEADER_NAME (1 << 0)
 #define PIPE_AT_START (1 << 1)
 #define END_LINE (1 << 2)
 #define BODY_CONTENT (1 << 3)
-
+// ************************************************************************** //
+//                               PhoneBook Class                              //
+// ************************************************************************** //
 class PhoneBook
 {
 

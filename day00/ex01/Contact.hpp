@@ -1,7 +1,9 @@
 #ifndef __CONTACT_H__
 #define __CONTACT_H__
 #include<iostream>
-
+// ************************************************************************** //
+//                               Contact Class                                //
+// ************************************************************************** //
 class Contact {
 private:
     std::string _firstName;

@@ -1,5 +1,6 @@
 #include "Contact.hpp"
 
+
 std::string Contact::getFirstName(){
     return _firstName;
 }
