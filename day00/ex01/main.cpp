@@ -4,7 +4,7 @@
 int main()
 {
     std::string userCommand;
-    PhoneBook Contacts;
+    PhoneBook   Contacts;
 
     Contacts.printHelp();
     std::cout << "\033[1;32mcommand: \033[0m";
@@ -17,8 +17,8 @@ int main()
       else if (!userCommand.compare("EXIT"))  
 	      Contacts.exitProgram();
       else
-            std::cout << "\033[1;31mInvalid command. Please try again.\033[0m" << std::endl;
+        std::cout << "\033[1;31mInvalid command. Please try again.\033[0m" << std::endl;
       std::cout << "\033[1;32mcommand: \033[0m";
     }
-    return (0);
+    return (EXIT_SUCCESS);
 }

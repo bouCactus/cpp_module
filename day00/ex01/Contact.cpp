@@ -2,19 +2,19 @@
 
 
 std::string Contact::getFirstName(){
-    return _firstName;
+    return (_firstName);
 }
 std::string Contact::getLastName(){
-    return _lastName;
+    return (_lastName);
 }
 std::string Contact::getNickname(){
-    return _nickname;
+    return (_nickname);
 }
 std::string Contact::getPhoneNum(){
-    return _phoneNum;
+    return (_phoneNum);
 }
 std::string Contact::getDarkestSecret(){
-    return _darkestSecret;
+    return (_darkestSecret);
 }
 
 void Contact::setFirstName(std::string firstName){
