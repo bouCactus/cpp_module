@@ -1,5 +1,5 @@
 
-NAME = FixedPM
+NAME = fixedPoint
 
 RM = rm -rf
 CXX = c++
