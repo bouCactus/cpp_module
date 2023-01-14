@@ -6,20 +6,24 @@
 class Fixed{
 public:
   Fixed();
+  ~Fixed();
   Fixed(int num);
   Fixed(float const num);
-  Fixed(const Fixed &obj);
+  Fixed(const Fixed &other);
 
-  void operator=(const Fixed &objPassByref);
-  ~Fixed();
+  Fixed &operator=(const Fixed &other);
+
   
-  float toFloat(void) const;
-  int   toInt(void)const;
-  void setRawBits(int num);
-  int getRawBits(void)const;
+  float    toFloat(void) const;
+  int      toInt(void)const;
+  void     setRawBits(int num);
+  int      getRawBits(void)const;
   
 private:
-  int              fNumber;
-  static const int fractionBite = 8;
+  int              _fNumber;
+  static const int _fractionBite;
 };
-#endif
+
+std::ostream& operator<<(std::ostream &out , const Fixed &Fnumber);
+
+#endif //__FIXED_H__

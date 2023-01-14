@@ -5,7 +5,8 @@
 
 class Fixed{
 public:
-  Fixed();
+  Fixed(void);
+  ~Fixed();
   Fixed(int num);
   Fixed(float const num);
   Fixed(const Fixed& obj);
@@ -28,16 +29,18 @@ public:
  Fixed&  operator++();
  Fixed&  operator--(int);
  Fixed&  operator--();
- ~Fixed();
+
   
   float toFloat(void) const;
   int   toInt(void)const;
   void setRawBits(int num);
   int getRawBits(void)const;
+
   static Fixed& min(Fixed& objOne, Fixed& objTwo);
   static Fixed& min(const Fixed& objOne, const Fixed& objTwo);
   static Fixed& max(Fixed& objOne, Fixed& ObjTwo);
   static Fixed& max(const Fixed& objOne, const Fixed& ObjTwo);
+
 private:
   int              fNumber;
   static const int fractionBite = 8;

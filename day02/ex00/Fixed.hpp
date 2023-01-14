@@ -4,15 +4,17 @@
 
 class Fixed{
 public:
-  Fixed();
-  Fixed(const Fixed &obj);// missing object parameter copy consturcture
-  void operator=(const Fixed &objPassByref);
-  ~Fixed();
+  Fixed(void);
+  Fixed(const Fixed &other);// missing object parameter copy consturcture
+  ~Fixed(void);
+
+  Fixed &operator=(const Fixed &other);
+
   void setRawBits(int num);
-  int getRawBits(void)const;
+  int  getRawBits(void)const;
   
 private:
-  int              fNumber;
-  static const int fractionBite = 8;
+  int              _fNumber;
+  static const int _fractionBite;
 };
-#endif
+#endif //__FIXED_H__

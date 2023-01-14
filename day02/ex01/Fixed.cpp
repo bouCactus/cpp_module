@@ -6,64 +6,60 @@ and explian why this ex exist
 
 #include "Fixed.hpp"
 
+const int Fixed::_fractionBite = 8;
 
-
-Fixed::Fixed()
-{
+Fixed::Fixed() :
+  _fNumber(0){
   std::cout << "Default constructor called" << std::endl;
-  setRawBits(0);
 }
 
-
-Fixed::Fixed(Fixed const &obj)
-{
+Fixed::Fixed(Fixed const &other){
   std::cout << "Copy constructor called" << std::endl;
-  *this = obj;
+  *this = other;
 }
 
-Fixed::Fixed(int num)
-{
+Fixed::Fixed(int num){
   std::cout << "Int constructor called" << std::endl;
-  fNumber = num << fractionBite;
+  _fNumber = num << _fractionBite;
 }
 
-Fixed::Fixed(float const num)
-{
+Fixed::Fixed(float const num){
   std::cout << "Float constructor called" << std::endl;
   //fNumber = roundf(num * 256); num * 2^fractionalBite
-  fNumber = roundf(num * (float) (1 << fractionBite));
+  _fNumber = roundf(num * (float) (1 << _fractionBite));
 }
 
-Fixed::~Fixed()
-{
+Fixed::~Fixed(){
   std::cout << "Destructor called" << std::endl;
 }
 
-int    Fixed::getRawBits(void)const
-{
-  return (fNumber);
+int    Fixed::getRawBits(void)const{
+  return (_fNumber);
 }
 
-void    Fixed::setRawBits(int number)
-{
-  fNumber = number;
+void    Fixed::setRawBits(int number){
+  _fNumber = number;
 }
 
-void Fixed::operator=(const Fixed &objPassByref)
-{
+Fixed &Fixed::operator=(const Fixed &other){
   std::cout << "Copy assignment operator called" << std::endl;
-  this->setRawBits(objPassByref.getRawBits());
+  if (this != &other)
+    this->_fNumber = other.getRawBits();
+  return (*this);
 }
 
-float Fixed::toFloat(void)const
-{
+float Fixed::toFloat(void)const{
   //fNumber / 2^fractionbite --> (float)fNumber / (float)fractionalBit
-  return (fNumber / (float)(1<<fractionBite));
+  return (_fNumber / (float)(1<<_fractionBite));
 }
 
-int Fixed::toInt(void)const
-{
+int Fixed::toInt(void)const{
   // Fnumber * 2^fractionBite shifting to right with fractionbite number
-  return (fNumber >> fractionBite);
+  return (_fNumber >> _fractionBite);
 }
 
+std::ostream& operator<<(std::ostream &out , const Fixed &fixed)
+{
+  out << fixed.toFloat() ;
+  return (out);
+}
