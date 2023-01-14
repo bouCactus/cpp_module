@@ -6,186 +6,168 @@ and explian why this ex exist
 
 #include "Fixed.hpp"
 
+const int Fixed::_fractionBite = 8;
 
-
-Fixed::Fixed()
-{
-  setRawBits(0);
+Fixed::Fixed() :
+  _fNumber(0){
 }
 
 
-Fixed::Fixed(Fixed const &obj)
-{
-  *this = obj;
+Fixed::Fixed(Fixed const &other){
+  *this = other;
 }
 
-Fixed::Fixed(int num)
-{
-  fNumber = num << fractionBite;
+Fixed::Fixed(int num){
+  _fNumber = num << _fractionBite;
 }
 
-Fixed::Fixed(float const num)
-{
+Fixed::Fixed(float const num){
   //fNumber = roundf(num * 256); num * 2^fractionalBite
-  fNumber = roundf(num * (float) (1 << fractionBite));
+  _fNumber = roundf(num * (float) (1 << _fractionBite));
 }
 
-Fixed::~Fixed()
-{
-  std::cout << "deleted" << std::endl;
+Fixed::~Fixed(){
 }
 
 int    Fixed::getRawBits(void)const
 {
-  return (fNumber);
+  return (_fNumber);
 }
 
 void    Fixed::setRawBits(int number)
 {
-  fNumber = number;
+  _fNumber = number;
 }
 
 float Fixed::toFloat(void)const
 {
   //fNumber / 2^fractionbite --> (float)fNumber / (float)fractionalBit
-  return (fNumber / (float)(1<<fractionBite));
+  return (_fNumber / (float)(1<<_fractionBite));
 }
 
-int Fixed::toInt(void)const
-{
+int Fixed::toInt(void)const{
   // Fnumber * 2^fractionBite shifting to right with fractionbite number
-  return (fNumber >> fractionBite);
+  return (_fNumber >> _fractionBite);
 }
 
-void Fixed::operator=(const Fixed &objPassByref)
-{
-  this->setRawBits(objPassByref.getRawBits());
+Fixed& Fixed::operator=(const Fixed &other){
+  if (this != &other){
+    this->setRawBits(other.getRawBits());
+  }
+  return (*this);
 }
 
-Fixed Fixed::operator+(const Fixed &obj)
-{
+Fixed Fixed::operator+(const Fixed &other){
   Fixed sum;
   
-  sum.setRawBits( this->getRawBits() + obj.getRawBits());
+  sum.setRawBits( this->getRawBits() + other.getRawBits());
   return (sum);
 }
 
-Fixed Fixed::operator-(const Fixed &obj)
-{
+Fixed Fixed::operator-(const Fixed &obj){
   Fixed sub;
+  
   sub.setRawBits( this->getRawBits() - obj.getRawBits());
   return (sub);
 }
 
-Fixed Fixed::operator*(const Fixed &obj)
-{
+Fixed Fixed::operator*(const Fixed &obj){
   Fixed mult;
   /* https://vanhunteradams.com/FixedPoint/FixedPoint.html */
   // (((x)>>8 * (y)>>8)>>0)
   // https://www.youtube.com/watch?v=npQF28g6s_k
-  mult.setRawBits((signed long long )(this->getRawBits() * (signed long long )obj.getRawBits()) >> fractionBite);
+  mult.setRawBits((signed long long )(this->getRawBits() * (signed long long )obj.getRawBits()) >> _fractionBite);
   return ( mult);
 }
 
-Fixed Fixed::operator/(const Fixed &obj)
-{
+Fixed Fixed::operator/(const Fixed &obj){
   Fixed div;
  
-  div.setRawBits(((signed long long ) this->getRawBits() << fractionBite) / obj.getRawBits());
+  div.setRawBits(((signed long long ) this->getRawBits() << _fractionBite) / obj.getRawBits());
   return (div);
 }
 
 
-
-
-
-bool Fixed::operator<(const Fixed &obj)
-{
+bool Fixed::operator<(const Fixed &obj){
   return (this->getRawBits() < obj.getRawBits());
 }
 
-bool Fixed::operator>(const Fixed &obj)
-{
+bool Fixed::operator>(const Fixed &obj){
   return (this->getRawBits() > obj.getRawBits());
 }
 
-bool Fixed::operator<=(const Fixed &obj)
-{
+bool Fixed::operator<=(const Fixed &obj){
   return (this->getRawBits() <= obj.getRawBits());
 }
     
-bool Fixed::operator>=(const Fixed &obj)
-{
+bool Fixed::operator>=(const Fixed &obj){
   return (this->getRawBits() >= obj.getRawBits());
 }
 
-bool Fixed::operator==(const Fixed &obj)
-{
+bool Fixed::operator==(const Fixed &obj){
   return (this->getRawBits() == obj.getRawBits());
 }
     
-bool Fixed::operator!=(const Fixed &obj)
-{
+bool Fixed::operator!=(const Fixed &obj){
   return (this->getRawBits() != obj.getRawBits());
 }
 
-Fixed& Fixed::operator++()
-{
+Fixed& Fixed::operator++(){
   this->setRawBits(this->getRawBits() + 1);
   return (*this);
 }
 
-Fixed& Fixed::operator++(int)
-{
-  Fixed *cp = new Fixed;
-  *cp = *this;
-  this->setRawBits(this->getRawBits() + 1);
-  return (*cp);
+Fixed Fixed::operator++(int){
+  Fixed temp;
+  temp = *this;
+  _fNumber = _fNumber << 1;
+  return (temp);
 }
 
-Fixed& Fixed::operator--()
-{
-
+Fixed& Fixed::operator--(){
   this->setRawBits(this->getRawBits() - 1);
   return (*this);
 }
 
-Fixed& Fixed::operator--(int)
-{
-  Fixed *cp = new Fixed;
-  *cp = *this;
-  this->setRawBits(this->getRawBits() - 1);
-  return (*cp);
+Fixed Fixed::operator--(int){
+  Fixed temp;
+  temp = *this;
+  _fNumber = _fNumber >> 1;
+  return (temp);
 }
-Fixed& Fixed::min(Fixed& objOne, Fixed& objTwo)
-{
-  if (objOne.getRawBits() < objTwo.getRawBits())
-    return (objOne);
+Fixed& Fixed::min(Fixed& first, Fixed& second){
+  if (first.getRawBits() < second.getRawBits())
+    return (first);
   else
-    return (objTwo);
+    return (second);
 }
-Fixed& Fixed::min(const Fixed& objOne, const Fixed& objTwo)
+Fixed& Fixed::min(const Fixed& first, const Fixed& second)
 {
-  if (objOne.getRawBits() < objTwo.getRawBits())
-    return (Fixed&)(objOne);
+  if (first.getRawBits() < second.getRawBits())
+    return (Fixed&)(first);
   else
-    return (Fixed&)(objTwo);
+    return (Fixed&)(second);
 }
 
-Fixed& Fixed::max(Fixed& objOne, Fixed& objTwo)
+Fixed& Fixed::max(Fixed& first, Fixed& second)
 {
-  if (objOne.getRawBits() > objTwo.getRawBits())
-    return (Fixed&)(objOne);
+  if (first.getRawBits() > second.getRawBits())
+    return (Fixed&)(first);
   else
-    return (Fixed&)(objTwo);
+    return (Fixed&)(second);
 }
 
-Fixed& Fixed::max(const Fixed& objOne, const Fixed& objTwo)
+Fixed& Fixed::max(const Fixed& first, const Fixed& second)
 {
-  if (objOne.getRawBits() > objTwo.getRawBits())
-    return (Fixed&)(objOne);
+  if (first.getRawBits() > second.getRawBits())
+    return (Fixed&)(first);
   else
-    return (Fixed&)(objTwo);
+    return (Fixed&)(second);
 }
 
 
+std::ostream& operator<<(std::ostream &out , const Fixed &fixed)
+{
+  out << fixed.toFloat() ;
+  return (out);
+}

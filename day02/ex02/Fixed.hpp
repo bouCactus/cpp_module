@@ -6,12 +6,12 @@
 class Fixed{
 public:
   Fixed(void);
-  ~Fixed();
+  ~Fixed(void);
   Fixed(int num);
   Fixed(float const num);
-  Fixed(const Fixed& obj);
+  Fixed(const Fixed& other);
 
-  void operator=(const Fixed& objPassByref);
+  Fixed& operator=(const Fixed& other);
   
   Fixed operator+(const Fixed& obj);
   Fixed operator-(const Fixed &obj);
@@ -25,9 +25,9 @@ public:
   bool operator==(const Fixed &obj);
   bool operator!=(const Fixed &obj);
 
- Fixed&  operator++(int);
+ Fixed   operator++(int);
  Fixed&  operator++();
- Fixed&  operator--(int);
+ Fixed   operator--(int);
  Fixed&  operator--();
 
   
@@ -36,13 +36,15 @@ public:
   void setRawBits(int num);
   int getRawBits(void)const;
 
-  static Fixed& min(Fixed& objOne, Fixed& objTwo);
-  static Fixed& min(const Fixed& objOne, const Fixed& objTwo);
-  static Fixed& max(Fixed& objOne, Fixed& ObjTwo);
-  static Fixed& max(const Fixed& objOne, const Fixed& ObjTwo);
+  static Fixed& min(Fixed& first, Fixed& second);
+  static Fixed& min(const Fixed& first, const Fixed& second);
+  static Fixed& max(Fixed& first, Fixed& second);
+  static Fixed& max(const Fixed& first, const Fixed& second);
 
 private:
-  int              fNumber;
-  static const int fractionBite = 8;
+  int              _fNumber;
+  static const int _fractionBite;
 };
+std::ostream& operator<<(std::ostream &out , const Fixed &fixed);
+
 #endif
