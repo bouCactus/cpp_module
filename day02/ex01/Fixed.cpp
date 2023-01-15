@@ -1,7 +1,10 @@
 
 /*
- this program contructor overload should fix because i feel the postion where you put is not right so deal wihtout right
-and explian why this ex exist
+  this is for learning how to convert float and int to Fixed Point
+  before code :
+  > fNumber / 2^fractionbite : (float)fNumber / (float)fractionalBit
+  > float to fixed Point : fNumber = roundf(num * 256) : num * 2^fractionalBite 
+  > Fixed Point to int   : Fnumber * 2^fractionBite shifting to right with fractionbite number
  */
 
 #include "Fixed.hpp"
@@ -25,8 +28,7 @@ Fixed::Fixed(int num){
 
 Fixed::Fixed(float const num){
   std::cout << "Float constructor called" << std::endl;
-  //fNumber = roundf(num * 256); num * 2^fractionalBite
-  _fNumber = roundf(num * (float) (1 << _fractionBite));
+    _fNumber = roundf(num * (float) (1 << _fractionBite));
 }
 
 Fixed::~Fixed(){
@@ -49,12 +51,10 @@ Fixed &Fixed::operator=(const Fixed &other){
 }
 
 float Fixed::toFloat(void)const{
-  //fNumber / 2^fractionbite --> (float)fNumber / (float)fractionalBit
   return (_fNumber / (float)(1<<_fractionBite));
 }
 
 int Fixed::toInt(void)const{
-  // Fnumber * 2^fractionBite shifting to right with fractionbite number
   return (_fNumber >> _fractionBite);
 }
 

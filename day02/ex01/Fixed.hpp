@@ -5,8 +5,8 @@
 
 class Fixed{
 public:
-  Fixed();
-  ~Fixed();
+  Fixed(void);
+  ~Fixed(void);
   Fixed(int num);
   Fixed(float const num);
   Fixed(const Fixed &other);
