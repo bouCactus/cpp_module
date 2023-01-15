@@ -29,20 +29,18 @@ Fixed::Fixed(float const num){
 Fixed::~Fixed(){
 }
 
-int    Fixed::getRawBits(void)const
-{
+int    Fixed::getRawBits(void)const{
   return (_fNumber);
 }
 
-void    Fixed::setRawBits(int number)
-{
+void    Fixed::setRawBits(int number){
   _fNumber = number;
 }
 
 float Fixed::toFloat(void)const
 {
   //fNumber / 2^fractionbite --> (float)fNumber / (float)fractionalBit
-  return (_fNumber / (float)(1<<_fractionBite));
+  return ((float)_fNumber / (float)(1<<_fractionBite));
 }
 
 int Fixed::toInt(void)const{
@@ -52,7 +50,7 @@ int Fixed::toInt(void)const{
 
 Fixed& Fixed::operator=(const Fixed &other){
   if (this != &other){
-    this->setRawBits(other.getRawBits());
+    _fNumber = other.getRawBits();
   }
   return (*this);
 }
@@ -76,14 +74,14 @@ Fixed Fixed::operator*(const Fixed &obj){
   /* https://vanhunteradams.com/FixedPoint/FixedPoint.html */
   // (((x)>>8 * (y)>>8)>>0)
   // https://www.youtube.com/watch?v=npQF28g6s_k
-  mult.setRawBits((signed long long )(this->getRawBits() * (signed long long )obj.getRawBits()) >> _fractionBite);
+  mult.setRawBits((long long )(this->getRawBits() * (long long )obj.getRawBits()) >> _fractionBite);
   return ( mult);
 }
 
 Fixed Fixed::operator/(const Fixed &obj){
   Fixed div;
  
-  div.setRawBits(((signed long long ) this->getRawBits() << _fractionBite) / obj.getRawBits());
+  div.setRawBits(((long long ) this->getRawBits() << _fractionBite) / obj.getRawBits());
   return (div);
 }
 
