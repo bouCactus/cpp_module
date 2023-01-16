@@ -3,7 +3,7 @@ NAME = fixedPoint
 
 RM = rm -rf
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
 SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp
 CXXOBJ = $(SRCS:.cpp=.o)
 

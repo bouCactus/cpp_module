@@ -1,14 +1,27 @@
 #include "Point.hpp"
+Fixed absNumber(Fixed num)
+{
+  // if (num > 0)
+  //   return (num);
+  // return (num * Fixed(-1));
+  return num < Fixed(0) ? num * -1 : num;
+}
+
+Fixed triangleArea(Point a, Point b, Point c){
+  Fixed area = Fixed(0.5f) * (a.getX() * (b.getY() - c.getY())
+                  + b.getX() * (c.getY() - a.getY())
+                  + c.getX() * (a.getY() - b.getY()));
+  return (absNumber(area));
+}
 
 bool bsp( Point const a, Point const b, Point const c, Point const point){
-  Fixed s1 = c.getY() - a.getY();
-  Fixed s2 = c.getX() - a.getX();
-  Fixed s3 = b.getY() - a.getY();
-  Fixed s4 = point.getY() - a.getY();
-  
-  Fixed w1 = (a.getX() * s1 + s4 * s2 - point.getX() * s1)
-              / (s3 * s2 - (b.getX()-a.getX()) * s1);
-  Fixed w2 = (s4- w1 * s3) / s1;
-
-  return (w1 > 0 && w2 > 0 && (w1 + w2) <= 1);
+  Fixed areaT = triangleArea(a , b, c);
+  Fixed areaTA = triangleArea(a, b, point);
+  Fixed areaTB = triangleArea(b, c, point);
+  Fixed areaTC = triangleArea(c, a, point);
+  Fixed sumTS  = areaTA  + areaTB + areaTC ;
+  return (areaTA != 0
+          && areaTB != 0 
+          && areaTC != 0 
+          && areaT == sumTS);
 }
