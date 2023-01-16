@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 15:03:04 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/16 15:03:05 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __FIXED_H__
 #define __FIXED_H__
 #include<iostream>
@@ -13,17 +25,17 @@ public:
 
   Fixed& operator=(const Fixed& other);
   
-  Fixed  operator+(const Fixed &obj);
-  Fixed  operator-(const Fixed &obj);
-  Fixed  operator*(const Fixed &obj);
-  Fixed  operator/(const Fixed &obj);
+  Fixed  operator+(const Fixed &obj)const ;
+  Fixed  operator-(const Fixed &obj)const ;
+  Fixed  operator*(const Fixed &obj)const ;
+  Fixed  operator/(const Fixed &obj)const;
 
-  bool   operator<(const Fixed &obj);
-  bool   operator>(const Fixed &obj);
-  bool   operator<=(const Fixed &obj);
-  bool   operator>=(const Fixed &obj);
-  bool   operator==(const Fixed &obj);
-  bool   operator!=(const Fixed &obj);
+  bool   operator<(const Fixed &obj)const;
+  bool   operator>(const Fixed &obj)const;
+  bool   operator<=(const Fixed &obj)const;
+  bool   operator>=(const Fixed &obj)const;
+  bool   operator==(const Fixed &obj)const;
+  bool   operator!=(const Fixed &obj)const;
 
  Fixed   operator++(int);
  Fixed&  operator++();
@@ -33,13 +45,13 @@ public:
   
   float  toFloat(void) const;
   int    toInt(void)const;
-  void   setRawBits(int num);
+  void   setRawBits(int const num);
   int    getRawBits(void)const;
 
   static Fixed& min(Fixed& first, Fixed& second);
-  static Fixed& min(const Fixed& first, const Fixed& second);
+  const static Fixed& min(const Fixed& first, const Fixed& second);
   static Fixed& max(Fixed& first, Fixed& second);
-  static Fixed& max(const Fixed& first, const Fixed& second);
+  const static Fixed& max(const Fixed& first, const Fixed& second);
 
 private:
   int              _fNumber;

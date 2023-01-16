@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 15:03:16 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/16 15:03:17 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #ifndef __POINT__H_
 #define __POINT__H_
@@ -12,13 +24,11 @@ public:
   Point(const Point &other);
   Point &operator=(const Point &other);
 
-  void setX(Fixed x);
-  void setY(Fixed y);
-  Fixed getX(void) const;
-  Fixed getY(void) const;
+  Fixed const getX(void) const;
+  Fixed const getY(void) const;
 private:
-  Fixed _x;
-  Fixed _y;
+  Fixed const _x;
+  Fixed const _y;
 };
 
 bool bsp( Point const a, Point const b, Point const c, Point const point);

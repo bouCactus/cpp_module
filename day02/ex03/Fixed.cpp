@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 15:02:57 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/16 15:02:58 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 /*
   this is an inplementation of fixed point with all operators and two function max minx
@@ -58,55 +70,55 @@ Fixed& Fixed::operator=(const Fixed &other){
   return (*this);
 }
 
-Fixed Fixed::operator+(const Fixed &other){
+Fixed Fixed::operator+(const Fixed &other)const {
   Fixed sum;
   
   sum.setRawBits( this->getRawBits() + other.getRawBits());
   return (sum);
 }
 
-Fixed Fixed::operator-(const Fixed &obj){
+Fixed Fixed::operator-(const Fixed &obj)const {
   Fixed sub;
   
   sub.setRawBits( this->getRawBits() - obj.getRawBits());
   return (sub);
 }
 
-Fixed Fixed::operator*(const Fixed &obj){
+Fixed Fixed::operator*(const Fixed &obj)const {
   Fixed mult;
 
   mult.setRawBits((long long )(this->getRawBits() * (long long )obj.getRawBits()) >> _fractionBite);
   return ( mult);
 }
 
-Fixed Fixed::operator/(const Fixed &obj){
+Fixed Fixed::operator/(const Fixed &obj)const{
   Fixed div;
  
   div.setRawBits(((long long ) this->getRawBits() << _fractionBite) / obj.getRawBits());
   return (div);
 }
 
-bool Fixed::operator<(const Fixed &obj){
+bool Fixed::operator<(const Fixed &obj)const{
   return (this->getRawBits() < obj.getRawBits());
 }
 
-bool Fixed::operator>(const Fixed &obj){
+bool Fixed::operator>(const Fixed &obj)const{
   return (this->getRawBits() > obj.getRawBits());
 }
 
-bool Fixed::operator<=(const Fixed &obj){
+bool Fixed::operator<=(const Fixed &obj)const{
   return (this->getRawBits() <= obj.getRawBits());
 }
     
-bool Fixed::operator>=(const Fixed &obj){
+bool Fixed::operator>=(const Fixed &obj)const{
   return (this->getRawBits() >= obj.getRawBits());
 }
 
-bool Fixed::operator==(const Fixed &obj){
+bool Fixed::operator==(const Fixed &obj)const{
   return (this->getRawBits() == obj.getRawBits());
 }
     
-bool Fixed::operator!=(const Fixed &obj){
+bool Fixed::operator!=(const Fixed &obj)const{
   return (this->getRawBits() != obj.getRawBits());
 }
 
@@ -139,25 +151,25 @@ Fixed& Fixed::min(Fixed& first, Fixed& second){
   else
     return (second);
 }
-Fixed& Fixed::min(const Fixed& first, const Fixed& second){
+const Fixed& Fixed::min(const Fixed& first, const Fixed& second){
   if (first.getRawBits() < second.getRawBits())
-    return (Fixed&)(first);
+    return (first);
   else
-    return (Fixed&)(second);
+    return (second);
 }
 
 Fixed& Fixed::max(Fixed& first, Fixed& second){
   if (first.getRawBits() > second.getRawBits())
-    return (Fixed&)(first);
+    return (first);
   else
-    return (Fixed&)(second);
+    return (second);
 }
 
-Fixed& Fixed::max(const Fixed& first, const Fixed& second){
+const Fixed& Fixed::max(const Fixed& first, const Fixed& second){
   if (first.getRawBits() > second.getRawBits())
-    return (Fixed&)(first);
+    return (first);
   else
-    return (Fixed&)(second);
+    return (second);
 }
 
 std::ostream& operator<<(std::ostream &out , const Fixed &fixed){

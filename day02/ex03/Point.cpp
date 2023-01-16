@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Point.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 15:03:14 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/16 15:03:15 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "Point.hpp"
 
@@ -16,8 +28,9 @@ Point::Point(Fixed x, Fixed y):
   
 }
 
-Point::Point(const Point &other){
-  *this = other;
+Point::Point(const Point &other):
+  _x(other.getX()),
+  _y(other.getY()){
 }
 
 Point::Point(float x, float y) :
@@ -26,25 +39,14 @@ Point::Point(float x, float y) :
 }
 
 Point &Point::operator=(const Point &other){
-  if (this != &other){
-    _x = other.getX();
-    _y = other.getY();
-  }
+  (void)other;
   return (*this);
 }
 
-void Point::setX(Fixed x){
-  _x = x;
-}
-
-void Point::setY(Fixed y){
-  _y = y;
-}
-
-Fixed Point::getX(void) const {
+Fixed const Point::getX(void) const {
   return (_x);
 }
 
-Fixed Point::getY(void) const{
+Fixed const Point::getY(void) const{
   return (_y);
 }
