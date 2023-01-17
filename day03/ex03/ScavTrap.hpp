@@ -6,17 +6,22 @@
 
 
 class ScavTrap : virtual public ClapTrap {
-
-    private:
-
-    public:
-    ScavTrap(void);
-    ~ScavTrap(void);
-    ScavTrap(const ScavTrap &copy);
-    ScavTrap(const std::string name);
+public:
+  ScavTrap(void);
+  ~ScavTrap(void);
+  ScavTrap(const ScavTrap &copy);
+  ScavTrap(const std::string name);
+  ScavTrap(const std::string name, unsigned int hitPoints, unsigned int energyPoints, unsigned int attackDamage);
 
     ScavTrap& operator= (const ScavTrap &copy);
+
     void    guardGate();
     void    attack(const std::string& target);
+    std::string     getName(void) const;
+    unsigned int    getHitPoint(void)const;
+    unsigned int    getEnergyPoints(void) const;
+    unsigned int    getAttackDamage(void) const;
+protected:
+  unsigned int _energyPoints;
 };
 #endif //__SCAVTRAP_H__

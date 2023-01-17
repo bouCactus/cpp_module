@@ -4,6 +4,14 @@
 #include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
 
+void printInfo(const DiamondTrap &player)
+{
+    std::cout << "Name: " << player.getName() << std::endl;
+    std::cout << "Hit Points " << player.getHitPoint() << std::endl;
+    std::cout << "Energy Points " << player.getEnergyPoints() << std::endl;
+    std::cout << "Attack damage " << player.getAttackDamage() << std::endl;
+
+}
 void printInfo(const ClapTrap &player)
 {
     std::cout << "Name: " << player.getName() << std::endl;
@@ -14,53 +22,41 @@ void printInfo(const ClapTrap &player)
 }
 int main()
 {
-//    ClapTrap one("one");
-//    ClapTrap three(one);
-//    ClapTrap two("two");
-//    ClapTrap fourth;
-//    ScavTrap ready("test");
-//    FragTrap set;
-//    ScavTrap go;
-
-//    fourth = two;
-
-//     std::cout << std::endl;
-//     one.setHitPoints(10);
-//     one.setEnergyPoints(10);
-//     one.setAttackDamage(4);
-//     two.setHitPoints(10);
-//     two.setEnergyPoints(10);
-//     two.setAttackDamage(3);
-//      printInfo(one);
-//     std::cout << std::endl;
-//     printInfo(two);
-//     printInfo(ready);
-//     std::cout << "__________________BATTLEFIELD______________________" << std::endl << std::endl;
-//     one.attack(two.getName());
-//     two.takeDamage(one.getAttackDamage());
-//     two.beRepaired(2);
-//     two.attack(one.getName());
-//     one.takeDamage(two.getAttackDamage());
-//     two.beRepaired(2);
-//     two.beRepaired(2);
-//     ready.guardGate();
-//     set.highFivesGuys();
-//     std::cout << "_________________________________________" << std::endl;
-//     printInfo(one);
-//     std::cout << std::endl;
-//     printInfo(two);
-//     std::cout << std::endl;
-
-DiamondTrap ayoub("ayoub");
-ayoub.setName("cat");
-ayoub.ClapTrap::setName("Dog");
-ClapTrap *p = new DiamondTrap("cow");
-
-printInfo(ayoub);
-std::cout << "eng" << ayoub.getAttackDamage() << std::endl;
-    
-    ayoub.whoAmI();
-    std::cout << "name ::" << p->getName() << std::endl;
-    std::cout << "naem two:: " << p->ClapTrap::getName() << std::endl;
+    {
+    DiamondTrap one;
+    printInfo(one);
+    one.whoAmI();
+    std::cout << std::endl;
+    std::cout << std::endl;
+    }
+    {
+        DiamondTrap fighter1("fighter1");
+        ScavTrap  fighter2("fighter2");
+        FragTrap fighter3("fighter3");
+        std::cout << "---------------------------players------------------------" << std::endl;
+        printInfo(fighter1);
+        std::cout << std::endl;
+        printInfo(fighter2);
+        std::cout << std::endl;
+        printInfo(fighter3);
+        std::cout << "---------------------------fight time---------------------" << std::endl;
+        fighter1.attack(fighter2.getName());
+        fighter2.takeDamage(fighter1.getAttackDamage());
+        fighter3.attack(fighter2.getName());
+        fighter2.takeDamage(fighter3.getAttackDamage());
+        fighter2.beRepaired(3);
+        fighter1.beRepaired(10);
+        std::cout << std::endl;
+        fighter1.whoAmI();
+        fighter2.guardGate();
+        fighter3.highFivesGuys();
+        std::cout << "----------------------------the end-----------------------" << std::endl;
+        printInfo(fighter1);
+        std::cout << std::endl;
+        printInfo(fighter2);
+        std::cout << std::endl;
+        printInfo(fighter3);
+        std::cout << std::endl;
+    }
     return (0);
 }
