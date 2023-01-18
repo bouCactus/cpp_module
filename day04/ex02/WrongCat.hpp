@@ -8,10 +8,10 @@
 class WrongCat: public WrongAnimal{
 
 public:
-    WrongCat();
+    WrongCat(void);
     WrongCat(const WrongCat &copy);
+    ~WrongCat(void);
     WrongCat &operator= (const WrongCat &copy);
-    ~WrongCat();
     void makeSound(void)const;
 private:
     Brain *_wrongCatBrain;

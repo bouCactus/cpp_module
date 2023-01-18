@@ -7,10 +7,10 @@
 class Animal{
 
 public:
-    Animal();
+    Animal(void);
     Animal(const Animal &copy);
     Animal(const std::string type);
-    ~Animal();
+    virtual ~Animal(void);
 
     Animal &operator = (const Animal &copy);
     void setType(const std::string &type);

@@ -7,11 +7,11 @@
 
 class Dog: public Animal{
 public:
-    Dog();
+    Dog(void);
     Dog(const Dog &copy);
-    ~Dog();
+    ~Dog(void);
     Dog &operator= (const Dog &copy);
-    void makeSound(void);
+    void makeSound()const;
 private:
     Brain *_dogBrain;
 

@@ -2,31 +2,25 @@
 #include"WrongCat.hpp"
 #include<iostream>
 
-WrongCat::WrongCat()
-{
-    setType("WrongCat");
-    std::cout << this->_type << " defult constructor called" << std::endl;
+WrongCat::WrongCat(){
+    this->_type = "WrongCat";
+    std::cout << this->_type << " default constructor called" << std::endl;
 }
-WrongCat::~WrongCat()
-{
-    std::cout << this->_type << " distructor called" << std::endl;
+WrongCat::~WrongCat(){
+    std::cout << this->_type << " destructor called" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &copy)
-{
+WrongCat::WrongCat(const WrongCat &copy){
     *this = copy;
 }
 
-WrongCat &WrongCat::operator= (const WrongCat &copy)
-{
-    if (this != &copy)
-    {
+WrongCat &WrongCat::operator= (const WrongCat &copy){
+    if (this != &copy){
         this->_type = copy._type;
     }
     return (*this);
 }
 
-void WrongCat::makeSound( void ) const
-{
+void WrongCat::makeSound( void ) const{
     std::cout << this->_type << " meoow mEEEEEEEEEEEEEEEEEwr" << std::endl;
 }

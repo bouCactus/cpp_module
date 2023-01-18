@@ -7,14 +7,15 @@
 class WrongAnimal{
 
 public:
-    WrongAnimal();
+    WrongAnimal(void);
     WrongAnimal(const WrongAnimal &copy);
     WrongAnimal(const std::string type);
-    ~WrongAnimal();
+    ~WrongAnimal(void);
     WrongAnimal &operator= (const WrongAnimal &copy);
-    void setType(const std::string &type);
+
+    void        setType(const std::string &type);
     std::string getType( void ) const;
-    void makeSound( void ) const;
+    void        makeSound( void ) const;
 
 protected:
     std::string _type;
