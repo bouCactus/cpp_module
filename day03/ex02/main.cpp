@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/18 07:58:16 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/18 08:10:51 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
@@ -33,7 +45,10 @@ int main()
      printInfo(one);
     std::cout << std::endl;
     printInfo(two);
+    std::cout << std::endl;
     printInfo(ready);
+    std::cout << std::endl;
+    printInfo(set);
     std::cout << "__________________BATTLEFIELD______________________" << std::endl << std::endl;
     one.attack(two.getName());
     two.takeDamage(one.getAttackDamage());
@@ -49,5 +64,7 @@ int main()
     std::cout << std::endl;
     printInfo(two);
     std::cout << std::endl;
+    printInfo(set);
+    
     return (0);
 }

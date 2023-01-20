@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/18 07:58:58 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/18 08:13:46 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
@@ -26,9 +38,9 @@ int main()
     DiamondTrap one;
     printInfo(one);
     one.whoAmI();
-    std::cout << std::endl;
-    std::cout << std::endl;
     }
+    std::cout << std::endl;
+    std::cout << std::endl;
     {
         DiamondTrap fighter1("fighter1");
         ScavTrap  fighter2("fighter2");

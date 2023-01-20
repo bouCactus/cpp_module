@@ -37,7 +37,7 @@ public:
   void            setHitPoints(const unsigned int points);
   void            setEnergyPoints(const unsigned int points);
 
-private:
+protected:
   std::string          _name;
   unsigned int         _hitPoints;
   unsigned int         _energyPoints;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/18 07:58:45 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/18 08:15:29 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "DiamondTrap.hpp"
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
@@ -20,7 +32,7 @@ DiamondTrap::DiamondTrap(std::string name){
 	this->_energyPoints = ScavTrap::_energyPoints;
 	this->_attackDamage = FragTrap::_attackDamage;
     this->_hitPointsCapacity = FragTrap::_hitPoints;
-    std::cout << "DiamondTrap paramiteraze constructor called" << _hitPoints << ' ' << _energyPoints << ' ' << _attackDamage << std::endl;
+    std::cout << "DiamondTrap paramiteraze constructor called" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &copy){

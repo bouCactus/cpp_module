@@ -50,11 +50,11 @@ void Span::addNumber(int num){
   _arrPtr[_currentPos++] = num;
 }
 
-const char* Span::BoundAccess::what() const _NOEXCEPT{
+const char* Span::BoundAccess::what() const throw(){
   return ("accessing an Span out of bounds");
 }
 
-const char* Span::ErrorFinding::what() const _NOEXCEPT{
+const char* Span::ErrorFinding::what() const throw(){
   return("error trying to found Span");
 }
 int distance(int first, int last){

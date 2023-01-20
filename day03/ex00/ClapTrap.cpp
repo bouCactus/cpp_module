@@ -6,15 +6,15 @@ ClapTrap::ClapTrap(void):
   _energyPoints(10),
   _attackDamage(0),
   _hitPointsCapacity(10){
-    std::cout << "defluat constructor called" << std::endl;
+    std::cout << "ClapTrap: Deflaut constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void){
-    std::cout << "ClapTrap Destructor called" << std::endl;
+    std::cout << "ClapTrap: Destructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &copy){
-    std::cout << "ClapTrap Copy constructor called" << std::endl;
+    std::cout << "ClapTrap: Copy constructor called" << std::endl;
     *this = copy;
 }
 
@@ -24,6 +24,7 @@ ClapTrap::ClapTrap(const std::string name) :
   _energyPoints(10),
   _attackDamage(0),
   _hitPointsCapacity(10){
+    std::cout << "ClapTrap: parameterized constructor called" << std::endl;
   }
 ClapTrap::ClapTrap(const std::string name, unsigned int hitPoints, unsigned int energyPoints, unsigned int attackDamage):
   _name(name),
@@ -31,10 +32,11 @@ ClapTrap::ClapTrap(const std::string name, unsigned int hitPoints, unsigned int 
   _energyPoints(energyPoints),
   _attackDamage(attackDamage),
   _hitPointsCapacity(hitPoints){
+    std::cout << "ClapTrap: parameterized constructor called" << std::endl;
 }
 
 ClapTrap &ClapTrap::operator = (const ClapTrap &copy){
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "ClapTrap: Copy assignment operator called" << std::endl;
     if (this !=  &copy){
         this->_name = copy._name;
         this->_hitPoints = copy._hitPoints;
@@ -44,8 +46,6 @@ ClapTrap &ClapTrap::operator = (const ClapTrap &copy){
     }
     return (*this);
 }
-
-
 
 void ClapTrap::attack(const std::string &traget){
     if (_energyPoints == 0 || _hitPoints == 0){
@@ -73,7 +73,7 @@ void ClapTrap::takeDamage(const unsigned int amount){
 void ClapTrap::beRepaired(const unsigned int amount){
     _hitPoints += amount;
     if (_hitPoints >= _hitPointsCapacity ){
-        std::cout << "ClapTrap " << _name << " is in good health now"<< std::endl;
+        std::cout << "ClapTrap " << _name << " is in good health for now"<< std::endl;
         _hitPoints = _hitPointsCapacity;
         return ;
     }

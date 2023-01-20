@@ -1,5 +1,5 @@
 
-NAME= bureaucrat
+NAME= bureaucratForm
 RM = rm -rf
 CXXFLAGS= -Wall -Wextra -Werror -std=c++98 -g
 SRCS = main.cpp Bureaucrat.cpp Form.cpp

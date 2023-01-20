@@ -6,7 +6,7 @@
 /*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:02:09 by aboudarg          #+#    #+#             */
-/*   Updated: 2023/01/16 15:02:10 by aboudarg         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:26:29 by aboudarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ know about contractors.
 * a disconstractor
 
  */
-
 #include "Fixed.hpp"
 
 const int Fixed::_fractionBite = 8;

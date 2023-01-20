@@ -1,32 +1,60 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
-#include"RobotomyRequestForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main(void)
-{   
-    std::string name = "ayoub";
-    Bureaucrat one("someone", 2);
-    // theform(name, 10, 2)
-    // Form *a = new RobotomyRequestForm("ayoub", 15, 10);
-    Form *a = new ShrubberyCreationForm("ayoub", 14, 15);
+{
+    std::cout << "---------test the execution of ShrubberyCreation From--------\n"
+              << std::endl;
+    {
+        try
+        {
+            Bureaucrat scabtree("scabtree", 5);
+            ShrubberyCreationForm shrubberyFrom("ShrubberyFrom", 10, 13);
 
-    try{
-        // for (int i = 0 ; i < 153 ; i++)
-        //     one.decrementGrade();
-        // one.setGrade(155);
-        one.signForm(*a);
-        // std::cout << one << std::endl;
-        one.executeForm(*a);
+            scabtree.signForm(shrubberyFrom);
+            shrubberyFrom.execute(scabtree);
+            std::cout << scabtree << std::endl;
+        }
+        catch (std::exception &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
     }
-    catch(std::exception &e)
+    std::cout << std::endl
+              << "------- test the execution of RobotomyRequest From --------\n"
+              << std::endl;
     {
-        std::cout << e.what() << std::endl;
+        try{
+            Bureaucrat screwtape("Screwtape", 5);
+            RobotomyRequestForm shrubberyFrom("ShrubberyFrom", 10, 13);
+
+           screwtape.signForm(shrubberyFrom);
+            shrubberyFrom.execute(screwtape);
+            std::cout << screwtape << std::endl;
+        }
+        catch (std::exception &e){
+            std::cout << e.what() << std::endl;
+        }
     }
-    catch(char const *e)
+      std::cout << std::endl
+              << "------- test the execution of PresidentialPardonForm From --------\n"
+              << std::endl;
     {
-        std::cout << e << std::endl;
+        try{
+            Bureaucrat toadpipe("Toadpipe", 5);
+            PresidentialPardonForm shrubberyFrom("ShrubberyFrom", 10, 13);
+
+            toadpipe.signForm(shrubberyFrom);
+            shrubberyFrom.execute(toadpipe);
+            std::cout << toadpipe << std::endl;
+        }
+        catch (std::exception &e){
+            std::cout << e.what() << std::endl;
+        }
     }
- 
+
     return (0);
 }

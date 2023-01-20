@@ -20,11 +20,11 @@ public:
     int             getExecutionRequired(void) const;
     struct      GradeTooHighException : public std::exception
     {
-        const char *what()const _NOEXCEPT;
+        const char *what()const throw();
     };
     struct      GradeTooLowException : public std::exception
     {
-        const char *what() const _NOEXCEPT;
+        const char *what() const throw();
     };
 private:
     const std::string   _name;

@@ -3,41 +3,37 @@
 #include <fstream>
 
 PresidentialPardonForm::PresidentialPardonForm(void) : 
-Form("none", 145, 137)
-{
+Form("none", 25, 5){
     std::cout << "PresidentialPardonForm: defualt constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy)
-{
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other){
     std::cout << "PresidentialPardonForm: copy constructor called" << std::endl;
-    *this = copy;
+    *this = other;
 }
 
-PresidentialPardonForm::~PresidentialPardonForm(void)
-{
+PresidentialPardonForm::~PresidentialPardonForm(void){
     std::cout << "PresidentialPardonForm: destructor called" << std::endl;
 }
 
-PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &copy)
-{
-    if (this != &copy)
-    {
-        // Do nothing , since all member private
-        //  Do nothing, since *all member is a const variable and cannot be modified
-    }
+PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &other){
+ // Do nothing , since all member private
+//  Do nothing, since *all member is a const variable and cannot be modified
+    (void)other;
     return (*this);
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string name, int signRequired, int executionRequired) : 
-Form(name, signRequired, executionRequired)
-{
+Form(name, signRequired, executionRequired){
     std::cout << "PresidentialPardonForm: parameterized constructor called" << std::endl;
+    if (signRequired < 1 || executionRequired < 1)
+        throw Form::GradeTooHighException();
+    if (signRequired > 150 || executionRequired > 150)
+        throw Form::GradeTooLowException(); 
 }
 
 
-void PresidentialPardonForm::executeRequest(std::string target) const
-{  
-   
+void PresidentialPardonForm::executeRequest(std::string target) const{    
+    std::cout << "PresidentialPardonFrom executing the form...." << std::endl;
     std::cout << target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }

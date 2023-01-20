@@ -14,14 +14,14 @@ public:
     ~Array(void);
     Array &operator=(const Array &copy);
     T &operator[](int i) const;
-    size_t size() const _NOEXCEPT;
+    size_t size() const throw();
     struct UnderFlowException : public std::exception
     {
-        const char *what() const _NOEXCEPT;
+        const char *what() const throw();
     };
     struct OverFlowException : public std::exception
     {
-        const char *what() const _NOEXCEPT;
+        const char *what() const throw();
     };
 
 private:
@@ -82,19 +82,19 @@ T &Array<T>::operator[](int i) const
 }
 
 template <typename T>
-size_t Array<T>::size(void) const _NOEXCEPT
+size_t Array<T>::size(void) const throw()
 {
     return (_size);
 }
 
 template <typename T>
-const char *Array<T>::UnderFlowException::what() const _NOEXCEPT
+const char *Array<T>::UnderFlowException::what() const throw()
 {
     return ("error: underflow :: index is out of bounds");
 }
 
 template <typename T>
-const char *Array<T>::OverFlowException::what() const _NOEXCEPT
+const char *Array<T>::OverFlowException::what() const throw()
 {
     return ("error: overflow :: index is out of bounds");
 }

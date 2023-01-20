@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/18 07:57:46 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/18 07:57:47 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
@@ -15,11 +27,11 @@ int main()
    ClapTrap one("one");
    ClapTrap two("two");
    ClapTrap three(one);
-   ClapTrap fourth;
+   ScavTrap fourth;
    ScavTrap ready("test");
    ScavTrap go;
 
-   fourth = two;
+   fourth = ready;
 
     std::cout << std::endl;
     one.setHitPoints(10);
@@ -33,10 +45,10 @@ int main()
     printInfo(two);
     printInfo(ready);
     std::cout << "__________________BATTLEFIELD______________________" << std::endl << std::endl;
-    // one.attack(two.getName());
+    one.attack(two.getName());
     two.takeDamage(one.getAttackDamage());
     two.beRepaired(2);
-    // two.attack(one.getName());
+    two.attack(one.getName());
     one.takeDamage(two.getAttackDamage());
     two.beRepaired(2);
     two.beRepaired(2);
@@ -46,5 +58,6 @@ int main()
     std::cout << std::endl;
     printInfo(two);
     std::cout << std::endl;
+    printInfo(fourth);
     return (0);
 }

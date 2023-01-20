@@ -15,10 +15,10 @@ public:
   int shortestSpan(void);
   int longestSpan(void);
   struct BoundAccess: std::exception{
-    const char *what() const _NOEXCEPT;
+    const char *what() const throw();
   };
   struct ErrorFinding: std::exception{
-    const char* what() const _NOEXCEPT;
+    const char* what() const throw();
   };
 private:
   int           *_arrPtr;

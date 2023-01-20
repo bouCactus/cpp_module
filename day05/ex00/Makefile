@@ -1,7 +1,7 @@
 
 NAME= bureaucrat
 RM = rm -rf
-CXXFLAGS= -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS= -Wall -Wextra -Werror -std=c++98 -pedantic
 SRCS = main.cpp Bureaucrat.cpp
 CXXOBJ = $(SRCS:.cpp=.o)
 CXX = c++
@@ -22,4 +22,3 @@ fclean: clean
 re: clean all
 
 .PHONY: all clean fclean re
-	

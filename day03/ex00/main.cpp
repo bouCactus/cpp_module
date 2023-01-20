@@ -17,7 +17,9 @@ int main(){
 
     std::cout << std::endl;
     printInfo(fighterOne);
+    std::cout << std::endl;
     printInfo(fighterTwo);
+    std::cout << std::endl;
     printInfo(loser);
     
     std::cout << "--------------------------fight ----------------" << std::endl;

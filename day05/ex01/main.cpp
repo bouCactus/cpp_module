@@ -3,19 +3,46 @@
 
 int main(void)
 {
-    Bureaucrat one("one");
-    Form theform("theform");
-
-    try{
-        // for (int i = 0 ; i < 153 ; i++)
-        //     one.decrementGrade();
-        one.setGrade(130);
-        one.signForm(theform);
-        std::cout << one << std::endl;
-    }
-    catch(std::exception &e)
     {
+      std::cout << "---------test normal case--------\n" << std::endl;
+      try{
+        Bureaucrat  scabtree("scabtree", 5);
+        Form googleFrom("googleFrom", 10, 13);
+
+        scabtree.signForm(googleFrom);
+        std::cout << scabtree << std::endl;
+      }
+      catch(std::exception &e){
         std::cout << e.what() << std::endl;
+      }
+    }
+    std::cout << std::endl << "------- test the egal --------\n" << std::endl;
+    {
+      try{
+        Bureaucrat slubgob("slubgob", 1);
+        Form googleFrom2("googleFrom2", 1, 1);
+
+        slubgob.signForm(googleFrom2);
+        std::cout << slubgob << std::endl;
+      }
+      catch(std::exception &e){
+        std::cout << e.what() << std::endl;
+      }
+
+    }
+    std::cout << std::endl << "-------test too low to be sign------\n" << std::endl;
+    {
+      try{
+        Bureaucrat slubgob("slubgob", 30);
+        Form googleFrom2("googleFrom2", 20, 1);
+
+        slubgob.signForm(googleFrom2);
+        std::cout << slubgob << std::endl;
+      }
+      catch(std::exception &e){
+        std::cout << e.what() << std::endl;
+      }
+
     }
     return (0);
 }

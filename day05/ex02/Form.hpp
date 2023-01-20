@@ -20,13 +20,11 @@ public:
     int             getSignRequired(void) const;
     int             getExecutionRequired(void) const;
     virtual void    executeRequest(std::string target) const = 0;
-    struct      GradeTooHighException : public std::exception
-    {
-        const char *what()const _NOEXCEPT;
+    struct      GradeTooHighException : public std::exception{
+        const char *what()const throw();
     };
-    struct      GradeTooLowException : public std::exception
-    {
-        const char *what() const _NOEXCEPT;
+    struct      GradeTooLowException : public std::exception{
+        const char *what() const throw();
     };
 
 private:
