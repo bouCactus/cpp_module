@@ -27,17 +27,90 @@ int main(void)
     // {
     //     std::cout << e << std::endl;
     // }
-    try
-    {
-        Intern someRandomIntern;
-        Form* rrf;
+    // try
+    // {
+    //     Intern someRandomIntern;
+    //     Form* rrf;
 
-        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-    }
-    catch(std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+    //     rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    // }
+    // catch(std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
  
+    std::cout << "---------test the execution of ShrubberyCreation From--------\n"
+              << std::endl;
+    {
+        try
+        {
+            Bureaucrat scabtree("scabtree", 5);
+            Intern form;
+            Form *ptrForm;
+            
+            ptrForm= form.makeForm("shrubbery creation", "shrubberyFrom");
+            scabtree.signForm(*ptrForm);
+            ptrForm->execute(scabtree);
+            std::cout << scabtree << std::endl;
+        }
+        catch (std::exception &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+    std::cout << std::endl
+              << "------- test the execution of RobotomyRequest From --------\n"
+              << std::endl;
+    {
+        try{
+            Bureaucrat screwtape("Screwtape", 5);
+            Intern form;
+            Form *ptrForm;
+            
+            ptrForm = form.makeForm("robotomy request" , "robotomy");
+            screwtape.signForm(*ptrForm);
+            ptrForm->execute(screwtape);
+            std::cout << screwtape << std::endl;
+        }
+        catch (std::exception &e){
+            std::cout << e.what() << std::endl;
+        }
+    }
+      std::cout << std::endl
+              << "------- test the execution of PresidentialPardonForm From --------\n"
+              << std::endl;
+    {
+        try{
+            Bureaucrat toadpipe("Toadpipe", 5);
+            Intern form;
+            Form *ptrForm;
+
+            ptrForm = form.makeForm("presidential pardon", "presidential");
+            toadpipe.signForm(*ptrForm);
+            ptrForm->execute(toadpipe);
+            std::cout << toadpipe << std::endl;
+        }
+        catch (std::exception &e){
+            std::cout << e.what() << std::endl;
+        }
+    }
+     std::cout << std::endl
+              << "------- test the execution of wrong From --------\n"
+              << std::endl;
+    {
+        try{
+            Bureaucrat toadpipe("Toadpipe", 5);
+            Intern form;
+            Form *ptrForm;
+
+            ptrForm = form.makeForm("wrong", "wrong");
+            toadpipe.signForm(*ptrForm);
+            ptrForm->execute(toadpipe);
+            std::cout << toadpipe << std::endl;
+        }
+        catch (std::exception &e){
+            std::cout << e.what() << std::endl;
+        }
+    }
     return (0);
 }

@@ -2,40 +2,36 @@
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(void) : 
-Form("none", 72, 45)
-{
+Form("none", 72, 45){
     std::cout << "RobotomyRequestForm: defualt constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy)
-{
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy){
     std::cout << "RobotomyRequestForm: copy constructor called" << std::endl;
     *this = copy;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm(void)
-{
+RobotomyRequestForm::~RobotomyRequestForm(void){
     std::cout << "RobotomyRequestForm: destructor called" << std::endl;
 }
 
-RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &copy)
-{
-    if (this != &copy)
-    {
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &copy){
         // Do nothing , since all member private
         //  Do nothing, since *all member is a const variable and cannot be modified
-    }
+    (void)copy;
     return (*this);
 }
 RobotomyRequestForm::RobotomyRequestForm(std::string name) : 
-Form(name,72,45)
-{
+Form(name,72,45){
     std::cout << "RobotomyRequestForm: parameterized constructor called" << std::endl;
 }
 RobotomyRequestForm::RobotomyRequestForm(std::string name, int signRequired, int executionRequired) : 
-Form(name, signRequired, executionRequired)
-{
+Form(name, signRequired, executionRequired){
     std::cout << "RobotomyRequestForm: parameterized constructor called" << std::endl;
+    if (signRequired < 1 || executionRequired < 1)
+        throw Form::GradeTooHighException();
+    if (signRequired > 150 || executionRequired > 150)
+        throw Form::GradeTooLowException(); 
 }
 
 
@@ -44,6 +40,7 @@ void RobotomyRequestForm::executeRequest(std::string target) const
     int timePeriod = 3600;// second;
     double number;
     
+     std::cout << "RobotomyRequestForm executing the from...." << std::endl;
     srand(time(NULL));
     number = rand() % timePeriod;
     if (number > (timePeriod / 2))

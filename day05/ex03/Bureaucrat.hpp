@@ -22,11 +22,11 @@ public:
     void        executeForm(Form const &form);
     struct      GradeTooHighException : public std::exception
     {
-        const char *what()const _NOEXCEPT;
+        const char *what()const throw();
     };
     struct      GradeTooLowException : public std::exception
     {
-        const char *what() const _NOEXCEPT;
+        const char *what() const throw();
     };
 private:
     std::string _name;

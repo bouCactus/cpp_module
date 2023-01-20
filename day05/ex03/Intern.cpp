@@ -2,44 +2,37 @@
 #include "RobotomyRequestForm.hpp"
 
 
-Intern::Intern(void)
-{
+Intern::Intern(void){
     std::cout << "Intern: defualt constructor called" << std::endl;
 }
 
-Intern::Intern(const Intern &copy)
-{
+Intern::Intern(const Intern &copy){
     std::cout << "Intern: copy constructor called" << std::endl;
     *this = copy;
 }
-Intern::~Intern(void)
-{
+Intern::~Intern(void){
     std::cout << "Intern: destcructor called" << std::endl;
 }
 
-Intern &Intern::operator=(const Intern &copy)
-{
-    if (this != &copy)
-    {
+Intern &Intern::operator=(const Intern &copy){
         //do nothing becuase nothing to do
-    }
+    (void)copy;
     return (*this);
 }
 
-Form *Intern::makeForm(std::string name, std::string traget)
-{
+Form *Intern::makeForm(std::string name, std::string target){
     Form *form;
 
     switch(hashit(name))
     {
         case 0:
-            form = new PresidentialPardonForm(traget);
+            form = new PresidentialPardonForm(target);
             break;
         case 1:
-            form = new RobotomyRequestForm(traget);
+            form = new RobotomyRequestForm(target);
             break;
         case 2:
-            form = new ShrubberyCreationForm(traget);
+            form = new ShrubberyCreationForm(target);
             break;
         default:
             throw FormNotFound();
@@ -48,8 +41,7 @@ Form *Intern::makeForm(std::string name, std::string traget)
     return form;
     
 }
-int Intern::hashit(std::string name)
-{
+int Intern::hashit(std::string name){
       int i;
     std::string str2[3] = {"presidential pardon",
                             "robotomy request",
@@ -61,7 +53,6 @@ int Intern::hashit(std::string name)
     return (i);
 }
 
-const char* Intern::FormNotFound::what() const _NOEXCEPT
-{
+const char* Intern::FormNotFound::what() const throw(){
     return ("traget not found!");
 }

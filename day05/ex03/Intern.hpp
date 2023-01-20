@@ -13,11 +13,10 @@ public:
     ~Intern();
     Intern(const Intern &copy);
     Intern &operator=(const Intern &copy);
-    Form *makeForm(std::string name, std::string traget);
+    Form *makeForm(std::string name, std::string target);
     int hashit(std::string name);
-    struct FormNotFound : public std::exception
-    {
-            const char *what() const _NOEXCEPT;
+    struct FormNotFound : public std::exception{
+        const char *what() const throw();
     };
 };
 #endif
