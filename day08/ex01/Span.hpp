@@ -10,6 +10,7 @@ public:
   Span(const Span &copy);
   Span(unsigned int n);
   ~Span(void);
+  
   Span &operator=(const Span &copy);
   void addNumber(int num);
   int shortestSpan(void);

@@ -1,10 +1,9 @@
 
-
-NAME=realType
+NAME=simpleCast
 RM = rm -rf
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
-SRCS = main.cpp Base.cpp identify.cpp
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+SRCS = main.cpp 
 CXXOBJS = $(SRCS:.cpp=.o)
 
 .cpp.o:

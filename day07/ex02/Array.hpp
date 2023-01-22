@@ -38,7 +38,9 @@ _size(0)
 };
 
 template <typename T>
-Array<T>::Array(unsigned int n) : _arr(new T[n]()), _size(n)
+Array<T>::Array(unsigned int n) : 
+_arr(new T[n]()), 
+_size(n)
 {
     std::cout << "Array parametrized constructor called" << std::endl;
 }
@@ -59,14 +61,19 @@ Array<T>::Array(const Array &copy)
 template <typename T>
 Array<T> &Array<T>::operator=(const Array<T> &copy)
 {
+    T *ptr;
     std::cout << "Array copy assignement called" << std::endl;
     if (this != &copy)
     {
-        // delete [] this->_arr;
-        this->_arr = new T[copy.size()];
-        this->_size = copy.size();
-        for (size_t i = 0; i < copy.size(); i++)
-            this->_arr[i] = copy[i];
+        ptr = new T[copy._size];
+        this->_size = copy._size;
+        for (size_t i = 0; i < copy._size; i++)
+        {
+            this->_arr[i] = copy._arr[i];// caused by a Write memory acces
+        std::cout << "here" << std::endl;
+        }
+        delete[]_arr;
+        _arr = ptr;
     }
     return (*this);
 }

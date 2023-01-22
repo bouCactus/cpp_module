@@ -6,7 +6,7 @@
 /*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:15:08 by aboudarg          #+#    #+#             */
-/*   Updated: 2023/01/20 16:15:09 by aboudarg         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:54:18 by aboudarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,17 @@ Intern &Intern::operator=(const Intern &copy){
 }
 
 Form *Intern::makeForm(std::string name, std::string target){
-    Form *form;
-
-    switch(hashit(name))
-    {
-        case 0:
-            form = new PresidentialPardonForm(target);
-            break;
-        case 1:
-            form = new RobotomyRequestForm(target);
-            break;
-        case 2:
-            form = new ShrubberyCreationForm(target);
-            break;
-        default:
-            throw FormNotFound();
-    }
+    int i;
+    Form *form[3] = {
+        new PresidentialPardonForm(target),
+        new RobotomyRequestForm(target),
+        new ShrubberyCreationForm(target)
+    };
+    i = hashit(name);
+    if (i > 2)
+        throw FormNotFound();
     std::cout << "Intern creates " << name << std::endl;
-    return form;
-    
+    return (form[i]);
 }
 int Intern::hashit(std::string name){
       int i;

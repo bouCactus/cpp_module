@@ -25,21 +25,24 @@ Span::Span(unsigned int n):
 
 Span::~Span(void){
   std::cout << "Span: destructor called" << std::endl;
+  delete[] _arrPtr;
 }
 
 Span &Span::operator=(const Span &copy){
+  std::cout << "Span: copy assignment operator called" << std::endl;
+  int *ptr;
   if (this != &copy){
     if (_size != copy._size){
-      delete[] _arrPtr;
-      _arrPtr = nullptr;
       _size = 0;
       _currentPos = 0;
       if (copy._size > 0)
-	_arrPtr = new int[copy._size];
+	      ptr = new int[copy._size];
       _size = copy._size;
     }
     _currentPos = copy._currentPos;
-    std::copy(copy._arrPtr, copy._arrPtr + _size, _arrPtr);
+    std::copy(copy._arrPtr, copy._arrPtr + _size, ptr);// this is can not found in c++98
+    delete[]_arrPtr;
+    _arrPtr = ptr;
   }
   return (*this);
 }

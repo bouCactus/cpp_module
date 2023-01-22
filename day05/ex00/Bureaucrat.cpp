@@ -6,7 +6,7 @@
 /*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:12:47 by aboudarg          #+#    #+#             */
-/*   Updated: 2023/01/20 16:12:48 by aboudarg         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:27:43 by aboudarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ _grade(grade){
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy){
     std::cout << "Bureaucrat: copy assignment operator called" << std::endl; 
     if (this != &copy){
-      this->_name = copy._name;
       this->_grade = copy._grade;
     }
     return (*this);
@@ -60,10 +59,6 @@ void Bureaucrat::setGrade(int grade)
   if ((this->_grade) > 150)
     throw Bureaucrat::GradeTooLowException();
     this->_grade = grade;
-}
-
-void Bureaucrat::setName(std::string name){
-  this->_name = name;
 }
 
 void Bureaucrat::incrementGrade(void){

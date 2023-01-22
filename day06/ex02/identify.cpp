@@ -24,33 +24,38 @@ void identify(Base* p)
   a = dynamic_cast<A*>(p);
   b = dynamic_cast<B*>(p);
   c = dynamic_cast<C*>(p);
-  if (a != nullptr)
+  if (a != NULL)
     std::cout << "this type: A" << std::endl;
-  else if (b != nullptr)
+  else if (b != NULL)
     std::cout << "this type: B" << std::endl;
-  else if (c != nullptr)
+  else if (c != NULL)
     std::cout << "this type: C" << std::endl;
 }
 void identify(Base& p)
 {
-  
   try
     {
-      A& a __attribute__ ((unused)) = dynamic_cast<A&>(p);
+      A& a  = dynamic_cast<A&>(p);
+
+      (void)a;
       std::cout << "this type: A" << std::endl;
     }
   catch(std::exception &e)
     {
       try
 	{
-	  B& b __attribute__ ((unused)) = dynamic_cast<B&>(p);
+	  B& b = dynamic_cast<B&>(p);
+    
+    (void)b;
 	  std::cout << "this type: B" << std::endl;
 	}
       catch(std::exception &e)
 	{
 	  try
 	    {
-	      C& c __attribute__((unused)) = dynamic_cast<C&>(p);
+	      C& c = dynamic_cast<C&>(p);
+
+        (void)c;
 	      std::cout << "this type C" << std::endl;
 	    }
 	  catch(std::exception &e)
