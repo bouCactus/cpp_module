@@ -1,22 +1,25 @@
 #include <iostream>
 #include "iter.hpp"
 
-std::string sum(std::string n)
+void printWithWow(std::string  &n)
+{
+    n = n + "wow";
+    std::cout << n << std::endl;
+}
+void print(std::string n)
 {
     std::cout << n << std::endl;
-    return (n);
 }
-int summ(int n)
-{
-    std::cout << n << std::endl;
-    return (n);
-}
+
+
+
 int main()
 {
-    std::string arr[2] = {
-        "hey", "how"
-    };
-    int arrint[2] = { 2, 3};
-    ::iter<int, 2, summ>(arrint);
+    std::string arr[5] = {
+        "hey", "how", "me", "you"};
+    // int arrint[2] = { 2, 3};
+    iter<std::string>(arr, 5, print);
+    iter<std::string>(arr, 5, printWithWow);
+
     return (0);
 }
