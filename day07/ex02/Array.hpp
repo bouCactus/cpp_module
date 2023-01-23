@@ -23,6 +23,9 @@ public:
     {
         const char *what() const throw();
     };
+  struct SizeNotcompatible : public std::exception{
+    const char *what() const throw();
+  };
 
 private:
     T *_arr;
@@ -55,25 +58,21 @@ template <typename T>
 Array<T>::Array(const Array &copy)
 {
     std::cout << "Array copy constructor called" << std::endl;
+    _arr = new T[copy._size];
+    _size = copy._size;
     *this = copy;
 }
 
 template <typename T>
 Array<T> &Array<T>::operator=(const Array<T> &copy)
 {
-    T *ptr;
     std::cout << "Array copy assignement called" << std::endl;
-    if (this != &copy)
-    {
-        ptr = new T[copy._size];
-        this->_size = copy._size;
-        for (size_t i = 0; i < copy._size; i++)
-        {
-            this->_arr[i] = copy._arr[i];// caused by a Write memory acces
-        std::cout << "here" << std::endl;
-        }
-        delete[]_arr;
-        _arr = ptr;
+    if (this != &copy){
+      if (_size != copy._size)
+	throw Array<T>::SizeNotcompatible();
+      for (size_t i = 0; i < copy._size; i++){
+	this->_arr[i] = copy[i];
+      }
     }
     return (*this);
 }
@@ -104,5 +103,9 @@ template <typename T>
 const char *Array<T>::OverFlowException::what() const throw()
 {
     return ("error: overflow :: index is out of bounds");
+}
+template <typename T>
+const char *Array<T>::SizeNotcompatible::what() const throw(){
+  return ("size not compatible");
 }
 #endif // __ARRAY_H__

@@ -4,55 +4,45 @@
 #include "Span.hpp"
 
 
-Span::Span(void):
-  _arrPtr(nullptr),
-  _size(0),
-  _currentPos(0){
+Span::Span(void){
   std::cout << "Span: defualt constructor called" << std::endl;
 }
 
 Span::Span(const Span &copy){
   std::cout << "Span: copy constructor called" << std::endl;
+  
   *this = copy;
 }
 
-Span::Span(unsigned int n):
-  _arrPtr(new int[n]),
-  _size(n),
-  _currentPos(0){
+Span::Span(unsigned int N):
+  _size(N){
   std::cout << "Span: prametrized constructor called" << std::endl;
 }
 
 Span::~Span(void){
   std::cout << "Span: destructor called" << std::endl;
-  delete[] _arrPtr;
 }
 
 Span &Span::operator=(const Span &copy){
   std::cout << "Span: copy assignment operator called" << std::endl;
-  int *ptr;
   if (this != &copy){
-    if (_size != copy._size){
-      _size = 0;
-      _currentPos = 0;
-      if (copy._size > 0)
-	      ptr = new int[copy._size];
-      _size = copy._size;
-    }
-    _currentPos = copy._currentPos;
-    std::copy(copy._arrPtr, copy._arrPtr + _size, ptr);// this is can not found in c++98
-    delete[]_arrPtr;
-    _arrPtr = ptr;
+    _span = copy._span;
+    _size = copy._size;
   }
   return (*this);
 }
 
 void Span::addNumber(int num){
-  if (_currentPos >= _size)
+  if ((_span.size()) >= _size)
     throw BoundAccess();
-  _arrPtr[_currentPos++] = num;
+  _span.push_back(num);
 }
-
+void Span::addRange(std::vector<int>::iterator begin,
+		    std::vector<int>::iterator end){
+  if ((_span.size()) >= _size || end - begin >= (long)_size)//check this befor you push
+    throw BoundAccess();
+    _span.insert(_span.end(), begin, end);
+}
 const char* Span::BoundAccess::what() const throw(){
   return ("accessing an Span out of bounds");
 }
@@ -66,25 +56,25 @@ int distance(int first, int last){
 
 int Span::shortestSpan(void){
   int dist;
-  if (_size < 2)
+  if (_span.size() < 2)
     throw ErrorFinding();
-  dist = distance(_arrPtr[0], _arrPtr[1]);
-  for (unsigned int i = 0; i < _size; i++){
-    for (unsigned int j = i + 1; j < _size ; j++){
-      dist = std::min(dist, distance(_arrPtr[i], _arrPtr[j]));
+  dist = distance(_span[0], _span[1]);
+  for (unsigned int i = 0; i < _span.size(); i++){
+    for (unsigned int j = i + 1; j < _span.size() ; j++){
+      dist = std::min(dist, distance(_span[i], _span[j]));
     }
   }
   return (dist);
 }
 
 int Span::longestSpan(void){
-  if (_size < 2)
+  if (_span.size() < 2)
     throw ErrorFinding();
-  int maxNumber = _arrPtr[0];
-  int minNumber = _arrPtr[0];
-  for (unsigned int i = 0; i < _size ; i++){
-    maxNumber = std::max(maxNumber, _arrPtr[i]);
-    minNumber = std::min(minNumber, _arrPtr[i]);
+  int maxNumber = _span[0];
+  int minNumber = _span[0];
+  for (unsigned int i = 0; i < _span.size() ; i++){
+    maxNumber = std::max(maxNumber, _span[i]);
+    minNumber = std::min(minNumber, _span[i]);
   }
   return (maxNumber - minNumber);
 }

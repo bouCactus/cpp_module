@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <vector>
 #include "Span.hpp"
 
 int main()
@@ -16,6 +17,11 @@ int main()
   }
   catch(std::exception &e){
       std::cout << e.what()<< std::endl;
+  }
+  {
+    // std::vector<int> ve = {2,3,4,5,6};
+    Span span;
+    // span.addRange(ve.begin(), ve.end());
   }
   return (0);
 }
