@@ -1,0 +1,10 @@
+#ifndef __MUTANTSTACK_H__
+#define __MUTANTSTACK_H__
+
+#include <stack>
+
+template <typename T>
+class MutantStack : public std::stack<T>{
+  
+};
+#endif //__MUTANTSTACK_H__

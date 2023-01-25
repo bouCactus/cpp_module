@@ -1,47 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/25 14:58:30 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/25 14:58:31 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include <iostream>
 #include "Array.hpp"
 #include <array>
-class A{
-public:
-    A(void)
-    {
-        std::cout << "A defualt constructor called" << std::endl;
-    }
-    int _x;
-};
 
+#define MAX_SIZE 5
 int main()
 {
-    // Array<A> arr(5);
-    // Array<A> arr;
-    // Array<int> arr(3);
-    // try
-    // {
-    //     arr[0] = 2;
-    //     arr[1] = 3;
-    //     std::cout << arr[1] << std::endl;
-    // }
-    // catch(std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
-    // std::cout << arr << std::endl;
-    // std::cout << arr[0] << std::endl;
-    Array<int> arr(5);
-    arr[0] = 2;
-    arr[1] = 3;
-    arr[2] = 4;
-    Array<int> arr2;
-    arr2 = arr;
-    std::cout << arr2.size() <<std::endl;
-    try
+    Array<int> arr(MAX_SIZE);
+
+    std::cout << std::endl << std::endl;
+    srand(time(NULL));
+    for(int i = 0; i < 5 ; i++)
+        arr[i] = rand() % 100;
     {
-        std::cout << arr2[0] << std::endl;
+        Array<int> tmp(arr);
+        for(size_t i = 0; i < tmp.size(); i++)
+            std::cout << tmp[i] << std::endl;
+        Array<int> tmp2(MAX_SIZE);
+        tmp2 = tmp;
+        for(size_t i = 0; i < tmp.size(); i++)
+            std::cout << tmp[i] << std::endl;
     }
-    catch(std::exception &e)
+    try{
+        arr[-43] = 0;
+    }
+    catch(const std::exception& e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << '\n';
     }
+    try{
+        arr[MAX_SIZE] = 0; 
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
     return (0);
 }

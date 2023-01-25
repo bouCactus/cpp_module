@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/25 14:58:28 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/25 14:58:29 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #ifndef __ARRAY_H__
 #define __ARRAY_H__
@@ -13,7 +25,8 @@ public:
     Array(const Array<T> &copy);
     ~Array(void);
     Array &operator=(const Array &copy);
-    T &operator[](int i) const;
+    T &operator[](int i);
+    const T  &operator[](int i)const ;
     size_t size() const throw();
     struct UnderFlowException : public std::exception
     {
@@ -52,6 +65,7 @@ template <typename T>
 Array<T>::~Array(void)
 {
     std::cout << "Array destructor called" << std::endl;
+    delete[] _arr;
 }
 
 template <typename T>
@@ -68,17 +82,27 @@ Array<T> &Array<T>::operator=(const Array<T> &copy)
 {
     std::cout << "Array copy assignement called" << std::endl;
     if (this != &copy){
-      if (_size != copy._size)
-	throw Array<T>::SizeNotcompatible();
-      for (size_t i = 0; i < copy._size; i++){
-	this->_arr[i] = copy[i];
-      }
+        if (_size != copy._size)
+	        throw Array<T>::SizeNotcompatible();
+        for (size_t i = 0; i < copy._size; i++){
+	        this->_arr[i] = copy[i];
+        }
     }
     return (*this);
 }
 
 template <typename T>
-T &Array<T>::operator[](int i) const
+const T &Array<T>::operator[](int i)const
+{
+    if (i >= (int)this->_size)
+        throw Array<T>::OverFlowException();
+    if (i < 0)
+        throw Array<T>::UnderFlowException();
+    return (*(this->_arr + i));
+}
+
+template <typename T>
+T &Array<T>::operator[](int i)
 {
     if (i >= (int)this->_size)
         throw Array<T>::OverFlowException();

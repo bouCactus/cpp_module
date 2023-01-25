@@ -1,4 +1,15 @@
-#include <exception>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   identify.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/24 15:38:32 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/01/24 16:15:09 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
@@ -30,6 +41,8 @@ void identify(Base* p)
     std::cout << "this type: B" << std::endl;
   else if (c != NULL)
     std::cout << "this type: C" << std::endl;
+  else
+    std::cout << "this type: not found" << std::endl;
 }
 void identify(Base& p)
 {
@@ -59,7 +72,9 @@ void identify(Base& p)
 	      std::cout << "this type C" << std::endl;
 	    }
 	  catch(std::exception &e)
-	    {}
+	    {
+        std::cout << "this type not found" << std::endl;
+      }
 	}
     }
   
