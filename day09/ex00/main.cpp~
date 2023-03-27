@@ -1,0 +1,46 @@
+#include<iostream>
+
+std::pair<std::string, double> adv_tokenizer(string s, char del)
+{
+    stringstream ss(s);
+    string word;
+    while (!ss.eof()) {
+        getline(ss, word, del);
+        
+    }
+
+}
+
+void parseLine(ofstream &file, std:map<std:string, int>& m){
+  std::string line;
+  std::string key;
+  double value;
+  while (file.good()){
+    getline(file, line);
+   
+  }
+}
+
+int main(int argc, char *arg[]){
+  ofstream inputFile;
+  ofstream data;
+  if (argc != 2){
+    std::cout << "Error: could not open file." << std::endl;
+    return (1);
+  }
+  inputFile.open(argv[1], ios::in);
+  
+  if (!inputFile.is_open()){
+    std::cout << "Error: could not open file." << std::endl;
+    return (1);
+  }
+  data.open("./data");
+  if (!data.is_open()){
+    std::cout << "Error: could not read from data" << std::endl;
+    return (1);
+  }
+  
+   
+  inputFile.close;
+  return (0);
+}
