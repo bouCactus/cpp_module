@@ -63,19 +63,57 @@ bool isValidDateFormat(const std::string& dateStr) {
     return true;
 }
 
-int check_token_grammer(std::pair<std::string, std::string>& token){
-  check_date(token.first);
+bool check_value(std::string& value){
+  try{
+    std::stoi(value);
+  }catch(const std::invalid_argument& e){
+    return (false);
+  }
+  return (true);
 }
-void parseFile(ofstream &file, std:map<std:string, int>& m){
+
+int check_token_grammer(std::pair<std::string, std::string>& token){
+  return (!check_date(token.first) || !check_value(token.second));
+}
+
+void parseDataFile(ofstream &file, std:map<std:string, int>& m){
   std::pair<std::string, std::string>token;
 
   while (file.good()){
     getline(file, line);
     token = adv_tokenizer(line);
-    check_token_grammer(token);
+    if(check_token_grammer(token))
+      std::exit(1);
+      m[token.first] = std::stoi(token.second)
   }
 }
 
+void caluclateCertainAmountBtc(std::map<std::string,int>&m,std::pair<std::string,int>token){
+  std::map<std::string, int>::iterator it;
+  it = m.find(token.first);
+  if (it == m.end())
+    it = m.upper_bound(token.first);
+
+  std::cout << token.first << " => "
+	    << token.second << " = "
+	    << it.second * token.second
+	    <<std::endl;
+
+}
+
+void parseIputFile(ofstream& file, std::map<std::string, int>&m){
+  std::pair<std::string,std::string>token;
+  std::pair<std::string,int>tokenInt;
+  while (file.good()){
+    getline(file,line);
+    token = adv_tokenizer(line);
+    if (!check_token_grammer(token)){
+      tokenInt.first = token.first;
+      tokenInt.second = std::stoi(token.second);
+      caluclateCertainAmountBtc(m,tokenInt);
+    }
+  }
+}
 int main(int argc, char *arg[]){
   ofstream inputFile;
   ofstream data;
