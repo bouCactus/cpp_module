@@ -1,6 +1,8 @@
 #include <string>
-#include<iostream>
+#include <iostream>
 #include <sstream>
+#include <fstream>
+#include <map>
 const char* ws = " \t\n\r\f\v";
 
 // trim from end of string (right)
@@ -23,26 +25,17 @@ inline std::string& trim(std::string& s, const char* t = ws)
     return ltrim(rtrim(s, t), t);
 }
 
-std::pair<std::string, std::string> adv_tokenizer(std::string s, char del)
-{
+std::pair<std::string, std::string> split(std::string s, char del){
     std::stringstream ss(s);
     std::string word;
-    int i = 0;
     std::string tokens[2];
-    while (!ss.eof()){
-        getline(ss, word, del);
-	// "   01-01-01   "
+    for (int i = 0; i < 2 && std::getline(ss, word, del); ++i) {
         tokens[i] = trim(word);
-        std::cout << "\"" << tokens[i] << "\""<< std::endl;
-        i++;
     }
-    std::pair<std::string, std::string> token;
-    token.first = tokens[0];
-    token.second = tokens[1];
-    return (token);
+    return (std::make_pair(tokens[0],tokens[1]));
 }
 
-bool isValidDateFormat(const std::string& dateStr) {
+bool isValidDate(const std::string& dateStr) {
     if (dateStr.size() != 10) {  // Check length
         return false;
     }
@@ -63,77 +56,99 @@ bool isValidDateFormat(const std::string& dateStr) {
     return true;
 }
 
-bool check_value(std::string& value){
+bool isValidNumber(const std::string& value){
   try{
-    std::stoi(value);
+    std::stof(value);
   }catch(const std::invalid_argument& e){
     return (false);
   }
   return (true);
 }
 
-int check_token_grammer(std::pair<std::string, std::string>& token){
-  return (!check_date(token.first) || !check_value(token.second));
+int isValidToken(const std::pair<std::string, std::string>& token){
+  // std::cerr << "validnumberfunc: " << isValidNumber(token.second) <<std::endl;
+  return (isValidDate(token.first) && isValidNumber(token.second));
 }
-
-void parseDataFile(ofstream &file, std:map<std:string, int>& m){
-  std::pair<std::string, std::string>token;
-
-  while (file.good()){
-    getline(file, line);
-    token = adv_tokenizer(line);
-    if(check_token_grammer(token))
-      std::exit(1);
-      m[token.first] = std::stoi(token.second)
+std::map<std::string, float>::iterator
+get_date_before(std::map<std::string, float>& m, const std::string& date) {
+  std::map<std::string, float>::iterator it = m.lower_bound(date);
+  if (it == m.begin()) {
+    return m.begin();
+  } else {
+    --it;
+    return it;
   }
 }
-
-void caluclateCertainAmountBtc(std::map<std::string,int>&m,std::pair<std::string,int>token){
-  std::map<std::string, int>::iterator it;
+void caluclateBtcValue(std::map<std::string, float>&m,std::pair<std::string, float>token){
+  std::map<std::string, float>::iterator it;
   it = m.find(token.first);
   if (it == m.end())
-    it = m.upper_bound(token.first);
-
+    it = get_date_before(m, token.first);
   std::cout << token.first << " => "
-	    << token.second << " = "
-	    << it.second * token.second
+	    << token.second
+	    << " * "
+	    << it->first << " "
+	    << it->second
+	    << " = "
+	    << it->second * token.second
 	    <<std::endl;
 
 }
 
-void parseIputFile(ofstream& file, std::map<std::string, int>&m){
+void parseDataFile(std::ifstream &file, std::map<std::string, float>& m){
+  std::pair<std::string, std::string>token;
+  std::string line;
+  // while (file.good()){
+  while  (getline(file, line)){
+    token = split(line, ',');
+
+    if(!isValidToken(token)){
+      std::cerr << "Error: database: invalid token format\n";
+      std::exit(1);
+      
+    }
+    m.insert(std::make_pair(token.first, std::stof(token.second)));
+  }
+}
+
+void parseInputFile(std::ifstream& file, std::map<std::string, float>&m){
   std::pair<std::string,std::string>token;
-  std::pair<std::string,int>tokenInt;
+  std::string line;
   while (file.good()){
     getline(file,line);
-    token = adv_tokenizer(line);
-    if (!check_token_grammer(token)){
-      tokenInt.first = token.first;
-      tokenInt.second = std::stoi(token.second);
-      caluclateCertainAmountBtc(m,tokenInt);
+    token = split(line, '|');
+    if (isValidToken(token)){
+      caluclateBtcValue(m, std::make_pair(token.first,std::stof(token.second)));
     }
   }
 }
-int main(int argc, char *arg[]){
-  ofstream inputFile;
-  ofstream data;
+
+int main(int argc, char *argv[]){
+  std::ifstream inputFile;
+  std::ifstream data;
+  std::map<std::string, float>m;
   if (argc != 2){
     std::cout << "Error: could not open file." << std::endl;
     return (1);
   }
-  inputFile.open(argv[1], ios::in);
+  inputFile.open(argv[1], std::ios::in);
   
   if (!inputFile.is_open()){
     std::cout << "Error: could not open file." << std::endl;
     return (1);
   }
-  data.open("./data");
+  data.open("./data.csv", std::ios::in);
   if (!data.is_open()){
     std::cout << "Error: could not read from data" << std::endl;
     return (1);
   }
+
+  parseDataFile(data, m);
+// for (auto i : m)
+  // std::cout << i.first << " \t\t\t " << i.second << std::endl;
+  parseInputFile(inputFile, m);
   
    
-  inputFile.close;
+  inputFile.close();
   return (0);
 }
