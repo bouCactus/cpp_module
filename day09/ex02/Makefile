@@ -1,6 +1,6 @@
 
 
-NAME = RPN
+NAME = PmergeMe
 
 RM = rm -rf
 CXX = c++

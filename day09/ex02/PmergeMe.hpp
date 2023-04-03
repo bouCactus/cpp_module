@@ -3,24 +3,23 @@
 #define __PMERGEME_H__
 
 #include <iostream>
-#include <algorithm>
 #include <vector>
-#include <set>
+#include <list>
 class PmergeMe{
 public:
   PmergeMe(void);
   ~PmergeMe();
-  PmergeMe(std::set<int>& arr);
+  PmergeMe(std::list<int>& arr);
   PmergeMe(std::vector<int>& arr);
   PmergeMe(const PmergeMe& other);
   PmergeMe operator= (const PmergeMe& other);
 
-  void merge_insertionSort(std::set<int>& arr, int left, int right);
-  void merge_insertionSort(std::vector<int>& arr, int left, int right);
-  void merge(std::set<int>& arr, int left, int mid, int right);
-  void merge(std::vector<int>& arr, int left, int mid, int right);
-  void insertionSort(std::set<int>& arr, std::set<int>::iterator p, std::set<int>::iterator q);
-  void insertionSort(std::vector<int>& arr, int p, int q);
+  static void           sort(std::list<int>& lst);
+  static void           sort(std::vector<int>& arr, int left, int right);
+  static std::list<int> merge(std::list<int> a, std::list<int>b);
+  static void           merge(std::vector<int>& arr, int left, int mid, int right);
+  static void           insertionSort(std::list<int>& Lst);
+  static void           insertionSort(std::vector<int>& arr, int p, int q);
 private:
   static const int K;
   

@@ -63,115 +63,80 @@ void PmergeMe::merge(std::vector<int>& arr, int left, int mid, int right) {
     }
 }
 
-void PmergeMe::merge_insertionSort(std::vector<int>& arr, int left, int right) {
+void PmergeMe::sort(std::vector<int>& arr, int left, int right) {
     if (right - left > K) {
         int mid = (left + right) / 2; 
-        merge_insertionSort(arr, left, mid);
-        merge_insertionSort(arr, mid + 1, right); 
+        sort(arr, left, mid);
+        sort(arr, mid + 1, right); 
         merge(arr, left, mid, right);
     } else {
         insertionSort(arr, left, right);
     }
 }
-// int main() {
-//     vector<int> v= { 2, 5, 1, 6, 7, 3, 8, 4, 9 };
-//     merge_insertionSort(v, 0, v.size());
-//     for (int i = 0; i < n; i++) {
-//         cout << v[i] << " ";
-//     }
-//     cout << endl;
-//     return 0;
-// }
+// -------------------------------------------------
 
-
-// _____________________________________________
-
-
-void PmergeMe::insertionSort(std::set<int>& s,
-			     std::set<int>::iterator p,
-			     std::set<int>::iterator q) {
-  for (std::set<int>::iterator i = p; i != q; i++) {
-        int tempVal = *(i);
-	std::set<int>::iterator j = i;
-        while (j != p && *(std::prev(j)) > tempVal) {
-            int prevVal = *(std::prev(j));
-            s.erase(std::prev(j));
-            s.insert(tempVal);
-            tempVal = prevVal;
-            j = std::prev(j);
+void PmergeMe::insertionSort(std::list<int>& lst)
+{
+  std::list<int> sorted;
+  std::list<int>::iterator it;
+    for (it = lst.begin(); it != lst.end(); ++it) {
+        if (sorted.empty() || *it <= sorted.front()) {
+            sorted.push_front(*it);
+        } else if (*it >= sorted.back()) {
+            sorted.push_back(*it);
+        } else {
+	  std::list<int>::iterator insertPos = sorted.begin();
+            while (*insertPos < *it) {
+                ++insertPos;
+            }
+            sorted.insert(insertPos, *it);
         }
-        s.erase(j);
-        s.insert(tempVal);
     }
+    lst = sorted;
 }
 
-void PmergeMe::merge(std::set<int>& s, int left, int mid, int right) {
-    int i, j, d;
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-
-    std::vector<int> L(n1), R(n2);
-
-    i = 0;
-    for (std::set<int>::iterator it = s.begin(); i < n1; ++i, ++it)
-        L[i] = *it;
-
-    j = 0;
-    for (std::set<int>::iterator it = std::next(s.begin(), n1); j < n2; ++j, ++it)
-        R[j] = *it;
-
-    i = 0;
-    j = 0;
-    d = left;
-
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            s.erase(s.find(L[i]));
-            s.insert(L[i]);
-            ++i;
-        }
-        else {
-            s.erase(s.find(R[j]));
-            s.insert(R[j]);
-            ++j;
+std::list<int> PmergeMe::merge(std::list<int> a, std::list<int> b)
+{
+  std::list<int> result;
+    while (!a.empty() && !b.empty()) {
+        if (a.front() <= b.front()) {
+            result.push_back(a.front());
+            a.pop_front();
+        } else {
+            result.push_back(b.front());
+            b.pop_front();
         }
     }
-
-    while (i < n1) {
-        s.erase(s.find(L[i]));
-        s.insert(L[i]);
-        ++i;
+    while (!a.empty()) {
+        result.push_back(a.front());
+        a.pop_front();
     }
-
-    while (j < n2) {
-        s.erase(s.find(R[j]));
-        s.insert(R[j]);
-        ++j;
+    while (!b.empty()) {
+        result.push_back(b.front());
+        b.pop_front();
     }
+    return result;
 }
 
-void PmergeMe::merge_insertionSort(std::set<int>& s, int left, int right) {
-  if (right - left > PmergeMe::K) {
-        int q = (left + right) / 2;
-        merge_insertionSort(s, left, q);
-        merge_insertionSort(s, q + 1, right);
-        merge(s, left, q, right);
+void PmergeMe::sort(std::list<int>& lst)
+{
+    if (lst.size() <= 1) {
+        return;
+    } else if (lst.size() <= K) {
+        insertionSort(lst);
+        return;
     } else {
-      std::vector<int> arr(s.begin(), s.end());
-        insertionSort(s, std::next(s.begin(), left), std::next(s.begin(), right));
-        s = std::set<int>(arr.begin(), arr.end());
+      std::list<int> a, b;
+      std::list<int>::iterator it = lst.begin();
+        for (size_t i = 0; i < lst.size() / 2; i++) {
+            a.push_back(*it);
+            it++;
+        }
+        for (; it != lst.end(); it++) {
+            b.push_back(*it);
+        }
+        sort(a);
+        sort(b);
+        lst = merge(a, b);
     }
 }
-
-// int main() {
-//     vector<int> v= { 2, 5, 1, 6, 7, 3, 8, 4, 9 };
-//     set<int> s(v.begin(), v.end());
-//     merge_insertionSort(s, 0, s.size());
-//     for (auto it = s.begin(); it != s.end(); ++it) {
-//         cout << *it << " ";
-//     }
-//     cout << endl;
-//     return 0;
-// }
-
-

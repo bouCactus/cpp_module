@@ -1,34 +1,59 @@
 #include <iostream>
 #include "PmergeMe.hpp"
-#include <set>
-int main(int argc, char *argv[]) {
+bool isValidNumber(char *str){
+   while (*str) {
+    if (!isdigit(*str)) {
+      return 1;
+    }
+    str++;
+   }
+   return (0);
+}
+int main(int argc, char* argv[])
+{
   std::vector<int> v;
-  v.push_back(2);
-  v.push_back(5);
-  v.push_back(1);
-  v.push_back(6);
-  v.push_back(7);
-  v.push_back(3);
-  v.push_back(8);
-  v.push_back(4);
-  v.push_back(9);
-  (void)argc;
-  (void)argv;
-  PmergeMe sort;
-  std::set<int> s(v.begin(), v.end());
-  sort.merge_insertionSort(v, 0, v.size());
-  for (size_t i = 0; i < v.size(); i++) {
-    std::cout << v[i] << " ";
+  std::list<int> l;
+
+    if(argc < 2)
+    {
+      std::cout << "Error: No sequence provided" << std::endl;
+        return 1;
     }
-  std::cout << "-----------------" << std::endl;
-  for (std::set<int>::iterator it = s.begin(); it != s.end(); ++it) {
-     std::cout << *it << " ";
+
+    for(int i = 1; i < argc; ++i)
+    {
+        int num = atoi(argv[i]);
+	std::vector<int>::iterator it = std::find(v.begin(), v.end(), num);
+        if(num < 0 || (num == 0 && strlen(argv[i]) != 1)
+	   || isValidNumber(argv[i]) || it != v.end())
+        {
+	  std::cout << "Error: Invalid input " << argv[i] << std::endl;
+            return 1;
+        }
+
+        v.push_back(num);
+        l.push_back(num);
     }
-   sort.merge_insertionSort(s, 0, s.size());
-   std::cout << "-------------" << std::endl;
-   for (std::set<int>::iterator it = s.begin(); it != s.end(); ++it) {
-     std::cout << *it << " ";
-    }
+
+    std::cout << "Before: ";
+    copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+    std::cout.precision(5);
+    // using vector for sort
+    clock_t t1 = clock();
+    PmergeMe::sort(v, 0, v.size() - 1);
+    double time = static_cast<double>(clock() - t1) / CLOCKS_PER_SEC;
+    std::cout << "After: ";
+    copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+    std::cout << "Time to process a range of " << v.size() << " elements with std::vector : " <<std::fixed << time << " us" << std::endl;
+
+    // using list for sort
+    clock_t t2 = clock();
+    PmergeMe::sort(l);
+    time  = static_cast<double>(clock() - t2) / CLOCKS_PER_SEC;
+    std::cout << "Time to process a range of " << l.size() << " elements with std::list : " <<std::fixed<< time << " us" << std::endl;
+
     return 0;
 }
 
