@@ -4,8 +4,8 @@ NAME = btc
 
 RM = rm -rf
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
-SRCS = main.cpp
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+SRCS = main.cpp BitcoinExchange.cpp
 CXXOBJ = $(SRCS:.cpp=.o)
 
 .cpp.o:
