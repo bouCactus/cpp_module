@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/05 12:53:52 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/04/05 12:53:53 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __BitcoinExchange_H__
 #define __BitcoinExchange_H__
 
@@ -7,14 +19,14 @@
 #include <fstream>
 #include <map>
 
-// const char* ws = " \t\n\r\f\v";
+
 
 
 
 class BitcoinExchange {
 public:
     // Default constructor
-  BitcoinExchange(){};
+  BitcoinExchange();
     
     // Destructor
   ~BitcoinExchange();
@@ -33,7 +45,6 @@ private:
     // Data members
   std::string _inputFile;
   std::map<std::string, float> _m;
-  // static const char* ws;
 
   inline std::string& rtrim(std::string& s);
   inline std::string& ltrim(std::string& s);
@@ -47,7 +58,6 @@ private:
   std::map<std::string, float>::iterator
   get_date_before(std::map<std::string, float>& m, const std::string& date);
   void caluclateBtcValue(std::map<std::string, float>& m, std::pair<std::string, float> token);
-  bool metaData(const std::pair<std::string, std::string> token, bool line);
   void parseDataFile(std::ifstream& file, std::map<std::string, float>& m);
   void parseInputFile(std::ifstream& file, std::map<std::string, float>&m);
 
