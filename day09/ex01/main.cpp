@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/05 12:54:06 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/04/05 12:54:07 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include <iostream>
 #include <stack>
@@ -18,8 +30,8 @@ bool isArithmetic(char ch){
 	  || ch == '*' || ch == '/');
  }
 
-bool isValidToken(std::stack<int>& s, char ch){
-  if (isdigit(ch) || (isArithmetic(ch) && s.size() == 2))
+bool isValidToken(char ch){
+  if (isdigit(ch) || (isArithmetic(ch)))
     return (true);
   std::cerr << "Error: at: " << "\'" << ch << "\'" <<  std::endl;
     std::exit(1);
@@ -29,11 +41,14 @@ void addTopNumbers(std::stack<int>& s){
   int firstnum;
   int secondnum;
 
+  if (s.size() < 2){
+    std::cerr << "Error" << std::endl;
+    std::exit(1);
+  }
   firstnum = s.top();
   s.pop();
   secondnum = s.top();
   s.pop();
-    std::cout << "debug: " << firstnum << "+" << secondnum << std::endl;
   s.push(secondnum + firstnum);
 }
 
@@ -41,11 +56,14 @@ void subtractTopNumbers(std::stack<int>& s){
   int firstnum;
   int secondnum;
 
+  if (s.size() < 2){
+    std::cerr << "Error" << std::endl;
+    std::exit(1);
+  }
   firstnum = s.top();
   s.pop();
   secondnum = s.top();
   s.pop();
-    std::cout << "debug: " << firstnum << "-" << secondnum << std::endl;
   s.push(secondnum - firstnum);
 }
 
@@ -53,32 +71,39 @@ void multiplyTopNumbers(std::stack<int>& s){
   int firstnum;
   int secondnum;
 
+  if (s.size() < 2){
+    std::cerr << "Error" << std::endl;
+    std::exit(1);
+  }
   firstnum = s.top();
   s.pop();
   secondnum = s.top();
   s.pop();
-  std::cout << "debug: " << firstnum << "*" << secondnum << std::endl;
   s.push(secondnum * firstnum);
 }
 
 void divideTopNumbers(std::stack<int>& s){
   int firstnum;
   int secondnum;
-
+  
+  if (s.size() < 2){
+    std::cerr << "Error" << std::endl;
+    std::exit(1);
+  }
   firstnum = s.top();
   s.pop();
   secondnum = s.top();
   s.pop();
-  std::cout << "debug: " << firstnum << "/" << secondnum << std::endl;
+  if (firstnum == 0){
+    std::cerr << "Edivide by zero exception" << std::endl;
+    std::exit(1);
+  }
   s.push(secondnum / firstnum);
+
 }
 
 void pushNumber(std::stack<int>& s, char ch){
   std::string str(1, ch);
-  if (s.size() >= 2){
-    std::cerr << "Error: Number: at: " << "\'" << ch<< "\'" <<  std::endl;
-    std::exit(1);
-  }
   s.push(std::stoi(str));
 }
 void calculateNumber(std::string str){
@@ -86,7 +111,7 @@ void calculateNumber(std::string str){
   std::stack<int> s;
   while (!str.empty()){
     str = skipWaitScapes(str);
-    if (isValidToken(s, str[0])){
+    if (isValidToken(str[0])){
       if (str[pos] == PLUS){
 	addTopNumbers(s);
       }else if (str[0] == MINS){
@@ -106,7 +131,7 @@ void calculateNumber(std::string str){
 }
 int main(int argc, char *argv[]){
   if (argc != 2){
-    std::cerr << "Error: argc"<< std::endl;
+    std::cerr << "Error: args"<< std::endl;
     return (1);
   }
   calculateNumber(argv[1]);

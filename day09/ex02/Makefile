@@ -1,10 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/05 12:54:15 by aboudarg          #+#    #+#              #
+#    Updated: 2023/04/05 12:54:16 by aboudarg         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 
 
 NAME = PmergeMe
 
 RM = rm -rf
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror #-std=c++98 -g
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 SRCS = main.cpp PmergeMe.cpp
 CXXOBJ = $(SRCS:.cpp=.o)
 

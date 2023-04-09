@@ -1,11 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/05 12:54:18 by aboudarg          #+#    #+#             */
+/*   Updated: 2023/04/05 12:54:19 by aboudarg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PmergeMe.hpp"
 
 
 
-PmergeMe::PmergeMe(){
-  
+PmergeMe::PmergeMe(const PmergeMe& other){
+  (void)other;
 }
-PmergeMe::~PmergeMe(){
+PmergeMe& PmergeMe::operator= (const PmergeMe& other){
+  (void)other;
+  return (*this);
 }
 const int PmergeMe::K = 5;
 
