@@ -64,7 +64,8 @@ std::pair<std::string, std::string> BitcoinExchange::split(std::string s, char d
 bool BitcoinExchange::isValidDate(const std::string& dateStr) {
 
 
-  if (dateStr.size() != 10) {  // Check length
+  if (dateStr.size() != 10 || dateStr[4] != '-'
+      || dateStr[7] != '-') {  // Check length
     std::cerr << "Error: bad input => " + dateStr << std::endl;;
     return (false);
   }
@@ -162,32 +163,33 @@ void BitcoinExchange::parseDataFile(std::ifstream &file, std::map<std::string, f
     if (line.empty())
       continue;
     std::pair<std::string, std::string> token = split(line, ',');
-    if (isFirstLine){
-      if (isFirstLine && token.first == "date" && token.second == "exchange_rate" )
-	isFirstLine = false;
-    }else{
+    if (isFirstLine && token.first == "date" && token.second == "exchange_rate" )
+      isFirstLine = false;
+    else{
       if(!isValidToken(token)){
 	std::cerr << "Error: database: invalid token format\n";
 	std::exit(1);
       }
       m.insert(std::make_pair(token.first, std::stof(token.second)));
     }
+    isFirstLine = false;
   }
 }
 
 void BitcoinExchange::parseInputFile(std::ifstream& file, std::map<std::string, float>&m){
   std::string line;
   bool isFirstLine = true;
+  
   while (getline(file,line)){
     if (line.empty())
       continue;
     std::pair<std::string, std::string> token = split(line, '|');
-    if (isFirstLine){
-      if (token.first == "date" && token.second == "value")
-	isFirstLine = false;
-    }else if (isValidToken(token) && isValidNumberInput(token) ){
+    if (isFirstLine && token.first == "date" && token.second == "value")
+      isFirstLine = false;
+    else if (isValidToken(token) && isValidNumberInput(token) ){
       caluclateBtcValue(m, std::make_pair(token.first,std::stof(token.second)));
     }
+    isFirstLine = false;
   }
 }
 
