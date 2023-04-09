@@ -6,7 +6,7 @@
 /*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:54:06 by aboudarg          #+#    #+#             */
-/*   Updated: 2023/04/05 12:54:07 by aboudarg         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:01:52 by aboudarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,106 +33,70 @@ bool isArithmetic(char ch){
 bool isValidToken(char ch){
   if (isdigit(ch) || (isArithmetic(ch)))
     return (true);
-  std::cerr << "Error: at: " << "\'" << ch << "\'" <<  std::endl;
-    std::exit(1);
+  throw std::invalid_argument(" Not valid number");
   return (false);
 }
-void addTopNumbers(std::stack<int>& s){
-  int firstnum;
-  int secondnum;
+
+void performOperation(std::stack<int>& s, char op){
+  int firstNum, secondNum;
 
   if (s.size() < 2){
-    std::cerr << "Error" << std::endl;
-    std::exit(1);
+    throw std::invalid_argument("Not enough numbers in stack");
   }
-  firstnum = s.top();
-  s.pop();
-  secondnum = s.top();
-  s.pop();
-  s.push(secondnum + firstnum);
-}
 
-void subtractTopNumbers(std::stack<int>& s){
-  int firstnum;
-  int secondnum;
+  secondNum = s.top();
+  s.pop();
+  firstNum = s.top();
+  s.pop();
 
-  if (s.size() < 2){
-    std::cerr << "Error" << std::endl;
-    std::exit(1);
+  switch(op){
+    case PLUS:
+      s.push(firstNum + secondNum);
+      break;
+    case MINS:
+      s.push(firstNum - secondNum);
+      break;
+    case TIMES:
+      s.push(firstNum * secondNum);
+      break;
+    case DIVISION:
+      if (secondNum == 0){
+        throw std::invalid_argument("Divide by zero");
+      }
+      s.push(firstNum / secondNum);
+      break;
+    default:
+      break;
   }
-  firstnum = s.top();
-  s.pop();
-  secondnum = s.top();
-  s.pop();
-  s.push(secondnum - firstnum);
-}
-
-void multiplyTopNumbers(std::stack<int>& s){
-  int firstnum;
-  int secondnum;
-
-  if (s.size() < 2){
-    std::cerr << "Error" << std::endl;
-    std::exit(1);
-  }
-  firstnum = s.top();
-  s.pop();
-  secondnum = s.top();
-  s.pop();
-  s.push(secondnum * firstnum);
-}
-
-void divideTopNumbers(std::stack<int>& s){
-  int firstnum;
-  int secondnum;
-  
-  if (s.size() < 2){
-    std::cerr << "Error" << std::endl;
-    std::exit(1);
-  }
-  firstnum = s.top();
-  s.pop();
-  secondnum = s.top();
-  s.pop();
-  if (firstnum == 0){
-    std::cerr << "Edivide by zero exception" << std::endl;
-    std::exit(1);
-  }
-  s.push(secondnum / firstnum);
-
-}
-
-void pushNumber(std::stack<int>& s, char ch){
-  std::string str(1, ch);
-  s.push(std::stoi(str));
 }
 void calculateNumber(std::string str){
-  int pos = 0;
   std::stack<int> s;
-  while (!str.empty()){
-    str = skipWaitScapes(str);
-    if (isValidToken(str[0])){
-      if (str[pos] == PLUS){
-	addTopNumbers(s);
-      }else if (str[0] == MINS){
-	subtractTopNumbers(s);
-      }else if (str[0] == TIMES){
-	multiplyTopNumbers(s);
-      }else if (str[0] == DIVISION){
-	divideTopNumbers(s);
+
+  for(std::string::size_type i = 0 ; i < str.size() ; i++){
+    if (str[i] == ' ')
+      continue;
+    if (isValidToken(str[i])){
+      if (isArithmetic(str[i])){
+	performOperation(s, str[i]);
       }else{
-	pushNumber(s, str[0]);
+	s.push(str[i] - '0');
       }
     }
-    str = str.substr(1);
   }
   //print the result
+  if (s.size() > 1)
+    throw std::invalid_argument("Invalid input too many Number in stack");
   std::cout << s.top() << std::endl;
 }
 int main(int argc, char *argv[]){
-  if (argc != 2){
-    std::cerr << "Error: args"<< std::endl;
-    return (1);
+  try{
+    
+    if (argc != 2)
+      throw std::invalid_argument("Invalid number of arguments");
+   calculateNumber(argv[1]);
+  }catch(std::exception& e ){
+    std::cerr << "Error: " << e.what() << std::endl;
   }
-  calculateNumber(argv[1]);
+  return (0);
 }
+
