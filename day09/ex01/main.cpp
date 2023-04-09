@@ -33,7 +33,7 @@ bool isArithmetic(char ch){
 bool isValidToken(char ch){
   if (isdigit(ch) || (isArithmetic(ch)))
     return (true);
-  throw std::invalid_argument(" Not valid number");
+  throw std::invalid_argument(" Not valid input");
   return (false);
 }
 
@@ -84,8 +84,8 @@ void calculateNumber(std::string str){
     }
   }
   //print the result
-  if (s.size() > 1)
-    throw std::invalid_argument("Invalid input too many Number in stack");
+  if (s.size() > 1 || s.size() <= 0)
+    throw std::invalid_argument("Invalid input too many or less Number in stack");
   std::cout << s.top() << std::endl;
 }
 int main(int argc, char *argv[]){
