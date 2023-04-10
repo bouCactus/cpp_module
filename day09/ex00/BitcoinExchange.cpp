@@ -61,25 +61,39 @@ std::pair<std::string, std::string> BitcoinExchange::split(std::string s, char d
     return (std::make_pair(tokens[0],tokens[1]));
 }
 
+bool isLeapYear(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+}
+
 bool BitcoinExchange::isValidDate(const std::string& dateStr) {
+  if (dateStr.length() != 10) {
+    return false;
+  }
 
+  for (int i = 0; i < 10; i++) {
+    if ((i == 4 || i == 7) && dateStr[i] != '-') {
+      return false;
+    }
+    if (i != 4 && i != 7 && !isdigit(dateStr[i])) {
+      return false;
+    }
+  }
 
-  if (dateStr.size() != 10 || dateStr[4] != '-'
-      || dateStr[7] != '-') {  // Check length
-    std::cerr << "Error: bad input => " + dateStr << std::endl;;
-    return (false);
+  int year, month, day;
+  std::istringstream(dateStr.substr(0, 4)) >> year;
+  std::istringstream(dateStr.substr(5, 2)) >> month;
+  std::istringstream(dateStr.substr(8, 2)) >> day;
+
+  if (year < 1900 || year > 9999 || month < 1 || month > 12 || day < 1) {
+    return false;
+  }
+
+  const int daysInMonth = (month == 2) ? (isLeapYear(year) ? 29 : 28) : ((month == 4 || month == 6 || month == 9 || month == 11) ? 30 : 31);
+  if (day > daysInMonth) {
+    return false;
   }
   
-  int year = std::stoi(dateStr.substr(0, 4));  
-  int month = std::stoi(dateStr.substr(5, 2)); 
-  int day = std::stoi(dateStr.substr(8, 2));  
-  
-  if (year < 1900 || year > 9999
-      || month < 1 || month > 12 || day < 1 || day > 31) {
-    std::cerr << "Error: bad input => " + dateStr << std::endl;
-    return (false);
-  }
-  return (true);
+  return true;
 }
 
 bool BitcoinExchange::isNumeric(const std::string& str) {
