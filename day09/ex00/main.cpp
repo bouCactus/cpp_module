@@ -18,9 +18,9 @@ int main(int argc, char *argv[]){
     return (1);
   }
   BitcoinExchange btc(argv[1]);
-
-  btc.processData();
-  btc.getBitcoinValueOnDate();
+    btc.processData();
+    btc.getBitcoinValueOnDate();
+  
 
   return (0);
 }

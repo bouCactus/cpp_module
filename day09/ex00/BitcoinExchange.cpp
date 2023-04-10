@@ -6,7 +6,7 @@
 /*   By: aboudarg <aboudarg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 12:53:44 by aboudarg          #+#    #+#             */
-/*   Updated: 2023/04/05 12:53:45 by aboudarg         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:37:48 by aboudarg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ std::pair<std::string, std::string> BitcoinExchange::split(std::string s, char d
     for (int i = 0; i < 2 && std::getline(ss, word, del); ++i) {
         tokens[i] = trim(word);
     }
+    if (getline(ss, word, del))
+      throw std::invalid_argument("Bad input => " + tokens[0]);
     return (std::make_pair(tokens[0],tokens[1]));
 }
 
@@ -67,14 +69,17 @@ bool isLeapYear(int year) {
 
 bool BitcoinExchange::isValidDate(const std::string& dateStr) {
   if (dateStr.length() != 10) {
+    std::cerr << "Error: bad input => " << dateStr << std::endl;
     return false;
   }
 
   for (int i = 0; i < 10; i++) {
     if ((i == 4 || i == 7) && dateStr[i] != '-') {
+      std::cerr << "Error: bad input => " << dateStr << std::endl;
       return false;
     }
     if (i != 4 && i != 7 && !isdigit(dateStr[i])) {
+      std::cerr << "Error: bad input => " << dateStr << std::endl;
       return false;
     }
   }
@@ -85,11 +90,13 @@ bool BitcoinExchange::isValidDate(const std::string& dateStr) {
   std::istringstream(dateStr.substr(8, 2)) >> day;
 
   if (year < 1900 || year > 9999 || month < 1 || month > 12 || day < 1) {
+    std::cerr << "Error: bad input => " << dateStr << std::endl;
     return false;
   }
 
   const int daysInMonth = (month == 2) ? (isLeapYear(year) ? 29 : 28) : ((month == 4 || month == 6 || month == 9 || month == 11) ? 30 : 31);
   if (day > daysInMonth) {
+    std::cerr << "Error: bad input => " << dateStr << std::endl;
     return false;
   }
   
@@ -119,7 +126,7 @@ bool BitcoinExchange::isValidNumberInput(const std::pair<std::string, std::strin
   try{
     float num = std::stof(token.second);
     if (num > 1000){
-      std::cerr << "Error: too large a number." << std::endl;;
+      std::cerr << "Error: too large a number." << std::endl;
       return (false);
     }
     if (num < 0){
@@ -172,11 +179,15 @@ void BitcoinExchange::caluclateBtcValue(std::map<std::string, float>&m,std::pair
 void BitcoinExchange::parseDataFile(std::ifstream &file, std::map<std::string, float>& m){
   std::string line;
   bool isFirstLine = true;
-
+  std::pair<std::string, std::string> token;
   while  (getline(file, line)){
     if (line.empty())
       continue;
-    std::pair<std::string, std::string> token = split(line, ',');
+    try{
+      token = split(line, ',');
+    }catch(std::exception& e ){
+      std::cerr << "Error " << e.what() << std::endl;
+    }
     if (isFirstLine && token.first == "date" && token.second == "exchange_rate" )
       isFirstLine = false;
     else{
@@ -193,17 +204,24 @@ void BitcoinExchange::parseDataFile(std::ifstream &file, std::map<std::string, f
 void BitcoinExchange::parseInputFile(std::ifstream& file, std::map<std::string, float>&m){
   std::string line;
   bool isFirstLine = true;
+  std::pair<std::string, std::string> token;
   
   while (getline(file,line)){
     if (line.empty())
       continue;
-    std::pair<std::string, std::string> token = split(line, '|');
+    try{
+      token = split(line, '|');
+    }catch(std::exception& e ){
+      std::cerr << "Error: " << e.what() << std::endl;
+      continue;
+    }
     if (isFirstLine && token.first == "date" && token.second == "value")
       isFirstLine = false;
     else if (isValidToken(token) && isValidNumberInput(token) ){
       caluclateBtcValue(m, std::make_pair(token.first,std::stof(token.second)));
     }
     isFirstLine = false;
+  
   }
 }
 
